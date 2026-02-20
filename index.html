@@ -8,20 +8,21 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <style>
         /* --- ESTILOS PERSONALIZADOS --- */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            /* Fondo animado con gradiente moderno */
             background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            overflow-x: hidden; /* Evita scroll horizontal */
+            overflow-x: hidden;
+            padding: 2rem 0;
         }
 
         @keyframes gradientBG {
@@ -30,7 +31,6 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Efecto Glassmorphism (Cristal) para la tarjeta */
         .glass-card {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(10px);
@@ -40,7 +40,8 @@
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
             padding: 3rem 2rem;
             max-width: 450px;
-            width: 90%; /* Para que en cel no pegue en los bordes */
+            width: 90%;
+            margin: 0 auto 50px auto;
         }
 
         .title-pascua {
@@ -53,9 +54,31 @@
         .subtitle {
             color: #555;
             font-size: 1.1rem;
+            font-weight: 500;
         }
 
-        /* Botón personalizado */
+        .info-box {
+            background: rgba(255, 255, 255, 0.6);
+            border-left: 5px solid #e73c7e;
+            border-radius: 10px;
+            padding: 1.2rem;
+            text-align: left;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            color: #333;
+            transition: transform 0.3s ease;
+        }
+
+        .info-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .info-title {
+            color: #e73c7e;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
         .btn-registro {
             background: linear-gradient(45deg, #11998e, #38ef7d);
             border: none;
@@ -77,7 +100,6 @@
             color: white;
         }
         
-        /* Animación del ícono flotante */
         .floating-icon {
             animation: floating 3s ease-in-out infinite;
         }
@@ -87,63 +109,155 @@
             50% { transform: translate(0, 15px); }
             100% { transform: translate(0, -0px); }
         }
+
+        /* Contenedor del Carrusel con la animación de inicio en 0 */
+        #contenedor-carrusel {
+            opacity: 0;
+            transform: scale(0.2);
+            transform-origin: top center;
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 100px;
+            transition: transform 0.1s ease-out, opacity 0.1s ease-out; 
+        }
+
+        /* --- Súper estilos para el carrusel Swiper --- */
+        .swiper {
+            width: 100%;
+            padding-top: 10px;
+            padding-bottom: 30px;
+        }
+        
+        .swiper-slide {
+            width: 75%;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        
+        .swiper-slide:not(.swiper-slide-active) {
+            transform: scale(0.85);
+            opacity: 0.6;
+        }
+
+        .swiper-slide img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
     </style>
 </head>
 <body>
 
-    <div class="container d-flex justify-content-center">
+    <div class="glass-card text-center" data-aos="zoom-in" data-aos-duration="1000">
         
-        <div class="glass-card text-center" data-aos="zoom-in" data-aos-duration="1000">
-            
-            <div class="mb-4 floating-icon">
-                <img src="logo-san-juan-diego.jpg" 
-                    alt="Logo Parroquia San Juan Diego" 
-                    class="img-fluid rounded-circle shadow-lg" 
-                    style="width: 150px; height: 150px; object-fit: cover; border: 4px solid white;">
-            </div>
+        <div class="mb-4 floating-icon">
+            <img src="logo-san-juan-diego.jpg" 
+                alt="Logo Parroquia San Juan Diego" 
+                class="img-fluid rounded-circle shadow-lg" 
+                style="width: 150px; height: 150px; object-fit: cover; border: 4px solid white;">
+        </div>
 
-            <h1 class="title-pascua mb-3">Pascua 2026</h1>
-            
-            <p class="subtitle mb-4">
-                ¡Cristo Vive! Prepárate para vivir la mejor experiencia de tu vida.
+        <h1 class="title-pascua mb-3">Pascua 2026</h1>
+        
+        <p class="subtitle mb-4">
+            ¡Cristo Vive! Prepárate para vivir la mejor experiencia de tu vida.
+        </p>
+
+        <div class="mb-4">
+            <div class="d-flex justify-content-center align-items-center mb-2" data-aos="fade-up" data-aos-delay="200">
+                <i class="far fa-calendar-alt me-2 text-primary"></i>
+                <span class="fw-bold">Semana Santa 2026</span>
+            </div>
+            <div class="d-flex justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="300">
+                <i class="fas fa-map-marker-alt me-2 text-danger"></i>
+                <span style="max-width: 300px; line-height: 1.4; font-weight: 500;">
+                    Parroquia San Juan Diego<br>
+                    <small class="text-muted">15 Av. Nte. Ote. 580, La Pimienta, 29034 Tuxtla Gutiérrez, Chiapas.</small>
+                </span>
+            </div>
+        </div>
+
+        <div class="info-box mb-5" data-aos="fade-left" data-aos-delay="400" data-aos-duration="1000">
+            <div class="info-title">
+                <i class="fas fa-backpack me-2"></i> ¿Qué necesitas llevar?
+            </div>
+            <p class="mb-0" style="font-size: 0.95rem; font-weight: 500;">
+                Lleva biblia, cuaderno y lapicero, paliacate (pañuelo), ropa deportiva y ropa extra.
             </p>
+        </div>
 
-            <div class="mb-5">
-                <div class="d-flex justify-content-center align-items-center mb-2" data-aos="fade-up" data-aos-delay="200">
-                    <i class="far fa-calendar-alt me-2 text-primary"></i>
-                    <span class="fw-bold">Semana Santa 2026</span>
-                </div>
-                <div class="d-flex justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="300">
-                    <i class="fas fa-map-marker-alt me-2 text-danger"></i>
-                    <span style="max-width: 300px; line-height: 1.4;">
-                        Parroquia San Juan Diego<br>
-                        <small class="text-muted">15 Av. Nte. Ote. 580, La Pimienta, 29034 Tuxtla Gutiérrez, Chiapas, México.</small>
-                    </span>
-                </div>
-            </div>
+        <a href="https://forms.gle/hQBuvpHgrCMBDTRCA" target="_blank" class="btn-registro" data-aos="pulse" data-aos-infinite="true" data-aos-delay="600">
+            REGISTRARME AHORA
+        </a>
 
-            <a href="https://forms.gle/hQBuvpHgrCMBDTRCA" target="_blank" class="btn-registro" data-aos="pulse" data-aos-infinite="true">
-                REGISTRARME AHORA
+        <div class="mt-4 small" data-aos="fade-in" data-aos-delay="700">
+            <span class="text-muted" style="font-weight: 600;">¿Tienes dudas? Contáctanos</span><br>
+            
+            <a href="https://www.instagram.com/daj.sjd?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
+            target="_blank" 
+            class="text-decoration-none fw-bold" 
+            style="color: #E1306C; font-size: 1.1rem;">
+                <i class="fab fa-instagram"></i> @daj.sjd
             </a>
+        </div>
 
-            <div class="mt-4 small" data-aos="fade-in" data-aos-delay="500">
-                <span class="text-muted">¿Tienes dudas? Contáctanos</span><br>
-                
-                <a href="https://www.instagram.com/daj.sjd?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
-                target="_blank" 
-                class="text-decoration-none fw-bold" 
-                style="color: #E1306C; font-size: 1.1rem;">
-                    <i class="fab fa-instagram"></i> @daj.sjd
-                </a>
+    </div>
+
+    <div id="contenedor-carrusel">
+        <h3 class="text-center mb-3" style="font-weight: 800; color: #2c3e50; background: rgba(255,255,255,0.85); padding: 10px; border-radius: 10px; backdrop-filter: blur(5px); width: 90%; margin: 0 auto;">
+            <i class="fas fa-camera-retro text-danger"></i> Momentos Inolvidables
+        </h3>
+        
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="https://picsum.photos/800/400?random=1" alt="Foto Pascua 1">
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://picsum.photos/800/400?random=2" alt="Foto Pascua 2">
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://picsum.photos/800/400?random=3" alt="Foto Pascua 3">
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://picsum.photos/800/400?random=4" alt="Foto Pascua 4">
+                </div>
             </div>
-
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    
     <script>
-        AOS.init();
+        // AOS para tarjeta de arriba
+        AOS.init({ once: true });
+
+        // Inicialización del carrusel
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: "auto", 
+            centeredSlides: true,
+            spaceBetween: 15,
+            loop: true,
+            grabCursor: true
+        });
+
+        // Evento de Scroll
+        window.addEventListener('scroll', () => {
+            const carrusel = document.getElementById('contenedor-carrusel');
+            const rect = carrusel.getBoundingClientRect();
+            const altoVentana = window.innerHeight;
+            
+            let visibilidad = (altoVentana - rect.top) / (altoVentana * 0.7);
+            visibilidad = Math.max(0, Math.min(1, visibilidad));
+            
+            const escala = 0.2 + (0.8 * visibilidad);
+            
+            carrusel.style.transform = `scale(${escala})`;
+            carrusel.style.opacity = visibilidad * 1.5; 
+        });
     </script>
 </body>
 </html>
