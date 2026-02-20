@@ -113,8 +113,9 @@
             border-color: black;
         }
 
-        .text-danger {
-            color: #dc3545 !important;
+        .asterisk {
+            color: black;
+            font-weight: bold;
         }
 
         .btn-registro {
@@ -152,7 +153,7 @@
         /* Contenedor del Carrusel */
         #contenedor-carrusel {
             opacity: 0;
-            transform: scale(0.2);
+            transform: scale(0.8);
             transform-origin: top center;
             width: 100%;
             max-width: 600px;
@@ -203,10 +204,16 @@
         </p>
 
         <div class="mb-4">
-            <div class="d-flex justify-content-center align-items-center mb-2" data-aos="fade-up" data-aos-delay="200">
+            <div class="d-flex justify-content-center align-items-center mb-1" data-aos="fade-up" data-aos-delay="200">
                 <i class="far fa-calendar-alt me-2" style="color: black;"></i>
-                <span class="fw-bold" style="color: black;">Semana Santa 2026</span>
+                <span class="fw-bold" style="color: black; font-size: 1.1rem;">Semana Santa 2026</span>
             </div>
+            <div class="mb-3" data-aos="fade-up" data-aos-delay="250">
+                <span style="font-weight: 700; color: black; background: rgba(0,0,0,0.1); padding: 5px 15px; border-radius: 20px; font-size: 0.95rem;">
+                    30 marzo - 01 abril, 3pm a 8pm
+                </span>
+            </div>
+
             <div class="d-flex justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="300">
                 <i class="fas fa-map-marker-alt me-2" style="color: black;"></i>
                 <span style="max-width: 300px; line-height: 1.4; font-weight: 500; color: black;">
@@ -220,37 +227,68 @@
             <div class="info-title">
                 <i class="fas fa-backpack me-2" style="color: black;"></i> ¿Qué necesitas llevar?
             </div>
-            <p class="mb-0" style="font-size: 0.95rem; font-weight: 500; color: black;">
+            <p class="mb-3" style="font-size: 0.95rem; font-weight: 500; color: black;">
                 Lleva biblia, cuaderno y lapicero, paliacate (pañuelo), ropa deportiva y ropa extra.
             </p>
+            
+            <div class="p-3 rounded" style="background: rgba(255,255,255,0.5); border: 2px dashed black;">
+                <h6 class="fw-bold mb-2 text-center" style="color: black; text-transform: uppercase;">Opciones de Paquetes</h6>
+                <div class="d-flex align-items-center mb-2">
+                    <i class="fas fa-ticket-alt fs-5 me-3" style="color: black;"></i>
+                    <div class="text-start">
+                        <strong style="color: black; font-size: 1rem;">Paquete 1 - $85</strong><br>
+                        <span style="color: black; font-size: 0.85rem; font-weight: 600;">Inscripción</span>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-tshirt fs-5 me-3" style="color: black;"></i>
+                    <div class="text-start">
+                        <strong style="color: black; font-size: 1rem;">Paquete 2 - $220</strong><br>
+                        <span style="color: black; font-size: 0.85rem; font-weight: 600;">Inscripción y playera</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <form id="registroPascuaForm" class="mt-4 text-start" data-aos="fade-up" data-aos-delay="500">
             <h5 class="fw-bold mb-4 text-center" style="color: black;">¡Asegura tu lugar!</h5>
             
-            <label class="form-label-custom">Nombre completo <span class="text-danger">*</span></label>
+            <label class="form-label-custom">Nombre completo <span class="asterisk">*</span></label>
             <input type="text" name="entry.621081863" class="form-control-custom" placeholder="Tu respuesta" required>
             
-            <label class="form-label-custom">Edad <span class="text-danger">*</span></label>
+            <label class="form-label-custom">Edad <span class="asterisk">*</span></label>
             <input type="number" name="entry.1490454749" class="form-control-custom" placeholder="Tu respuesta" required>
             
-            <label class="form-label-custom">Teléfono (WhatsApp) <span class="text-danger">*</span></label>
+            <label class="form-label-custom">Teléfono (WhatsApp) <span class="asterisk">*</span></label>
             <input type="tel" name="entry.2007439274" class="form-control-custom" placeholder="Tu respuesta" required>
             
             <label class="form-label-custom">Parroquia o Capilla de origen</label>
             <input type="text" name="entry.523175738" class="form-control-custom" placeholder="Tu respuesta">
             
-            <label class="form-label-custom">Nombre del contacto de emergencia (tutor) <span class="text-danger">*</span></label>
+            <label class="form-label-custom">Nombre del contacto de emergencia (tutor) <span class="asterisk">*</span></label>
             <input type="text" name="entry.517533376" class="form-control-custom" placeholder="Tu respuesta" required>
             
-            <label class="form-label-custom">Teléfono del contacto de emergencia <span class="text-danger">*</span></label>
+            <label class="form-label-custom">Teléfono del contacto de emergencia <span class="asterisk">*</span></label>
             <input type="tel" name="entry.18630972" class="form-control-custom" placeholder="Tu respuesta" required>
             
             <label class="form-label-custom">¿Tienes alguna alergia o condición médica? (Opcional)</label>
             <textarea class="form-control-custom" name="entry.76012710" rows="2" placeholder="Tu respuesta"></textarea>
             
-            <label class="form-label-custom">Talla <span class="text-danger">*</span></label>
-            <input type="text" name="entry.83136480" class="form-control-custom" placeholder="Tu respuesta" required>
+            <label class="form-label-custom">¿Qué paquete vas a tomar? <span class="asterisk">*</span></label>
+            <select class="form-control-custom" name="entry.781424884" required style="cursor: pointer; appearance: auto;">
+                <option value="" disabled selected>Selecciona tu paquete...</option>
+                <option value="PAQUETE 1">PAQUETE 1</option>
+                <option value="PAQUETE 2">PAQUETE 2</option>
+            </select>
+            
+            <label class="form-label-custom">Talla <span class="asterisk">*</span></label>
+            <select class="form-control-custom" name="entry.83136480" required style="cursor: pointer; appearance: auto;">
+                <option value="" disabled selected>Selecciona tu talla...</option>
+                <option value="CHICA">CHICA</option>
+                <option value="MEDIANA">MEDIANA</option>
+                <option value="GRANDE">GRANDE</option>
+                <option value="EXTRA GRANDE">EXTRA GRANDE</option>
+            </select>
             
             <button type="submit" id="btnGuardar" class="btn-registro mt-4" data-aos="pulse" data-aos-infinite="true">
                 GUARDAR REGISTRO
@@ -307,10 +345,8 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     
     <script>
-        // AOS para tarjeta de arriba
         AOS.init({ once: true });
 
-        // Inicialización del carrusel
         var swiper = new Swiper(".mySwiper", {
             slidesPerView: "auto", 
             centeredSlides: true,
@@ -319,43 +355,39 @@
             grabCursor: true
         });
 
-        // Evento de Scroll
+        const altoOriginal = window.innerHeight;
+
         window.addEventListener('scroll', () => {
             const carrusel = document.getElementById('contenedor-carrusel');
             const rect = carrusel.getBoundingClientRect();
-            const altoVentana = window.innerHeight;
             
-            let visibilidad = (altoVentana - rect.top) / (altoVentana * 0.7);
+            let visibilidad = (altoOriginal - rect.top) / (altoOriginal * 0.5);
             visibilidad = Math.max(0, Math.min(1, visibilidad));
             
-            const escala = 0.2 + (0.8 * visibilidad);
+            const escala = 0.8 + (0.2 * visibilidad);
             
             carrusel.style.transform = `scale(${escala})`;
             carrusel.style.opacity = visibilidad * 1.5; 
         });
 
-        // LÓGICA DEL FORMULARIO - ENVÍO A GOOGLE FORMS
         const form = document.getElementById('registroPascuaForm');
         const btnGuardar = document.getElementById('btnGuardar');
 
         form.addEventListener('submit', function(e) {
             e.preventDefault(); 
             
-            // Cambiamos el texto del botón mientras envía
             const textoOriginal = btnGuardar.innerHTML;
             btnGuardar.innerHTML = 'Enviando...';
             btnGuardar.disabled = true;
 
-            // URL del formulario de Google (Cambiamos viewform a formResponse)
             const actionURL = "https://docs.google.com/forms/d/e/1FAIpQLSdABoef75mrI1n3G9SAleT7AF5Eg4uD2jVRSgsieE8JFqm5aw/formResponse";
             const formData = new FormData(form);
 
             fetch(actionURL, {
                 method: 'POST',
-                mode: 'no-cors', // Oculta el error de CORS de Google
+                mode: 'no-cors', 
                 body: formData
             }).then(() => {
-                // Alerta de éxito
                 Swal.fire({
                     title: '¡Registro Exitoso! 🎉',
                     text: 'Prepárate con todo el ánimo porque vas a vivir una experiencia inolvidable. ¡Nos vemos en Pascua!',
@@ -363,9 +395,8 @@
                     confirmButtonColor: '#000000',
                     confirmButtonText: '¡Genial!'
                 });
-                form.reset(); // Limpia los campos
+                form.reset(); 
             }).catch((error) => {
-                // Por si falla tu internet
                 Swal.fire({
                     title: 'Oops...',
                     text: 'Hubo un error al enviar el registro. Revisa tu conexión a internet e intenta de nuevo.',
@@ -373,7 +404,6 @@
                     confirmButtonColor: '#000000'
                 });
             }).finally(() => {
-                // Restauramos el botón a la normalidad
                 btnGuardar.innerHTML = textoOriginal;
                 btnGuardar.disabled = false;
             });
