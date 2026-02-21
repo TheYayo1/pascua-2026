@@ -17,6 +17,15 @@
 
     <style>
         /* --- ESTILOS PERSONALIZADOS CON PALETA DEL FLYER --- */
+        html, body {
+            /* ESTO MATA EL SCROLL HORIZONTAL PARA SIEMPRE */
+            overflow-x: hidden !important; 
+            max-width: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(-45deg, #22b4b1, #2095da, #7abc44, #22b4b1,#6d05d4);
@@ -26,9 +35,9 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            overflow-x: hidden;
             padding: 2rem 0;
             color: #333;
+            isolation: isolate; 
         }
 
         @keyframes gradientBG {
@@ -37,377 +46,357 @@
             100% { background-position: 0% 50%; }
         }
 
-        .glass-card {
+        /* --- NUEVA ESTRUCTURA LIMPIA PARA LA TARJETA --- */
+        .card-container {
+            position: relative;
+            max-width: 450px;
+            width: 90%;
+            margin: 0 auto 50px auto;
+        }
+
+        /* Capa 1: Fondo Blanco Opaco (Atrás de los peces) */
+        .glass-card-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(255, 255, 255, 0.95); 
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.5);
             box-shadow: 0 8px 32px 0 rgba(32, 149, 218, 0.3); 
+            z-index: 5;
+        }
+
+        /* Capa 3: Textos y Formulario (Por encima de los peces) */
+        .glass-card-content {
+            position: relative;
             padding: 3rem 2rem;
-            max-width: 450px;
-            width: 90%;
-            margin: 0 auto 50px auto;
+            text-align: center;
+            z-index: 15; 
         }
 
-        .title-pascua {
-            color: #2095da; 
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+        /* --- EL ACUARIO Y LOS PECES --- */
+        .ocean-container {
+            position: fixed;
+            top: 0; left: 0; 
+            width: 100%; height: 100%; /* Ajustado para evitar desbordes */
+            z-index: 10; 
+            pointer-events: none;
+            overflow: hidden;
         }
 
-        .subtitle {
-            color: #555;
-            font-size: 1.1rem;
-            font-weight: 600;
+        .fish-track {
+            position: absolute;
+            width: 65px; height: 25px;
         }
 
-        .info-box {
-            background: rgba(255, 255, 255, 0.8);
-            border-left: 5px solid #f04335; 
-            border-radius: 10px;
-            padding: 1.2rem;
-            text-align: left;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease;
+        /* ESTADO NORMAL DE LOS PECES (Regresando a la superficie MUY lento) */
+        .fish-svg {
+            width: 100%; height: 100%;
+            /* Cuando se les quita el susto, tardan 8 segundos en volver a aparecer suavemente */
+            transition: transform 8s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 8s ease-out;
+            transform: scale(1);
+            opacity: 1;
         }
 
-        .info-box:hover {
-            transform: translateY(-5px);
+        /* EL SUSTO (Se hunden rápido) */
+        .ocean-container.fleeing .fish-svg {
+            /* Se hacen chiquitos simulando que se hunden y desaparecen en 0.3s */
+            transform: scale(0.15);
+            opacity: 0;
+            transition: transform 0.3s ease-in, opacity 0.2s ease-in;
         }
 
-        .info-title {
-            color: #f04335; 
-            font-weight: 800;
-            font-size: 1.1rem;
-            margin-bottom: 8px;
+        /* Rutas exactas con rotación pura (así siempre ven al frente) */
+        .track-1 { top: 25%; animation: swimRight 22s linear infinite; }
+        .track-2 { top: 75%; animation: swimRight 28s linear infinite 5s; width: 50px; height: 18px; }
+        @keyframes swimRight {
+            0% { left: -150px; transform: rotate(0deg) translateY(0); }
+            50% { transform: rotate(0deg) translateY(-25px); }
+            100% { left: 100vw; transform: rotate(0deg) translateY(0); }
         }
 
-        /* --- ESTILOS PARA LOS CAMPOS DEL FORMULARIO --- */
-        .form-label-custom {
-            font-weight: 700;
-            font-size: 0.9rem;
-            color: #2095da; 
-            margin-bottom: 4px;
-            display: block;
+        .track-3 { top: 35%; animation: swimLeft 24s linear infinite 2s; width: 80px; height: 30px; }
+        .track-4 { top: 85%; animation: swimLeft 30s linear infinite 10s; width: 45px; height: 15px;}
+        @keyframes swimLeft {
+            0% { left: 100vw; transform: rotate(180deg) translateY(0); }
+            50% { transform: rotate(180deg) translateY(25px); }
+            100% { left: -150px; transform: rotate(180deg) translateY(0); }
         }
 
-        .form-control-custom {
-            background: rgba(255, 255, 255, 0.7);
-            border: 1px solid rgba(34, 180, 177, 0.3); 
-            border-radius: 10px;
-            padding: 10px 15px;
-            margin-bottom: 15px;
-            color: #333;
+        .track-5 { animation: swimDiagDown 32s linear infinite 3s; width: 55px; height: 20px;}
+        @keyframes swimDiagDown {
+            0% { top: -100px; left: -100px; transform: rotate(35deg); }
+            100% { top: 120vh; left: 120vw; transform: rotate(35deg); }
+        }
+
+        .track-6 { animation: swimDiagUp 26s linear infinite 8s; }
+        @keyframes swimDiagUp {
+            0% { top: 120vh; left: 120vw; transform: rotate(215deg); }
+            100% { top: -100px; left: -100px; transform: rotate(215deg); }
+        }
+
+        /* --- EFECTO AGUA AL TOCAR --- */
+        .water-ripple {
+            position: fixed;
+            width: 20px; height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9999;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.2);
+            animation: ripple-anim 0.8s ease-out forwards;
+        }
+
+        @keyframes ripple-anim {
+            0% { width: 0; height: 0; opacity: 1; border-width: 4px; }
+            100% { width: 220px; height: 220px; opacity: 0; border-width: 0px; }
+        }
+
+        /* --- RESTO DE TUS ESTILOS --- */
+        .title-pascua { color: #2095da; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; }
+        .subtitle { color: #555; font-size: 1.1rem; font-weight: 600; }
+        .info-box { background: rgba(255, 255, 255, 0.8); border-left: 5px solid #f04335; border-radius: 10px; padding: 1.2rem; text-align: left; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s ease; }
+        .info-box:hover { transform: translateY(-5px); }
+        .info-title { color: #f04335; font-weight: 800; font-size: 1.1rem; margin-bottom: 8px; }
+        .form-label-custom { font-weight: 700; font-size: 0.9rem; color: #2095da; margin-bottom: 4px; display: block; }
+        .form-control-custom { background: rgba(255, 255, 255, 0.7); border: 1px solid rgba(34, 180, 177, 0.3); border-radius: 10px; padding: 10px 15px; margin-bottom: 15px; color: #333; width: 100%; transition: all 0.3s ease; font-size: 1rem; font-family: 'Poppins', sans-serif; font-weight: 500; }
+        .form-control-custom::placeholder { color: rgba(0, 0, 0, 0.4); font-weight: 400; }
+        .form-control-custom:focus { background: rgba(255, 255, 255, 1); outline: none; box-shadow: 0 0 10px rgba(34, 180, 177, 0.4); border-color: #22b4b1; }
+        .asterisk { color: #f04335; font-weight: bold; }
+        .btn-registro { background: linear-gradient(45deg, #7abc44, #22b4b1); border: none; color: white; padding: 15px 30px; font-size: 1.2rem; font-weight: 800; border-radius: 50px; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(34, 180, 177, 0.4); width: 100%; display: block; text-decoration: none; cursor: pointer; font-family: 'Poppins', sans-serif; }
+        .btn-registro:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(34, 180, 177, 0.6); color: white; }
+        .floating-icon { animation: floating 3s ease-in-out infinite; }
+        @keyframes floating { 0% { transform: translate(0,  0px); } 50% { transform: translate(0, 15px); } 100% { transform: translate(0, -0px); } }
+        .social-btn { display: flex; align-items: center; justify-content: center; width: auto; min-width: 240px; padding: 10px 20px; border-radius: 50px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); transition: transform 0.2s ease; border: none; font-size: 1rem; color: white !important; }
+        .social-btn:active { transform: scale(1.05); box-shadow: 0 6px 20px rgba(0,0,0,0.25); }
+        .ig-btn { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+        .tk-btn { background: #000000; }
+        
+        /* --- SECCIÓN INFERIOR CARRUSEL --- */
+        .wrapper-scroll-ref {
+            position: relative;
             width: 100%;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 500;
-        }
-
-        .form-control-custom::placeholder {
-            color: rgba(0, 0, 0, 0.4);
-            font-weight: 400;
-        }
-
-        .form-control-custom:focus {
-            background: rgba(255, 255, 255, 1);
-            outline: none;
-            box-shadow: 0 0 10px rgba(34, 180, 177, 0.4);
-            border-color: #22b4b1; 
-        }
-
-        .asterisk {
-            color: #f04335; 
-            font-weight: bold;
-        }
-
-        .btn-registro {
-            background: linear-gradient(45deg, #7abc44, #22b4b1);
-            border: none;
-            color: white;
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            font-weight: 800;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(34, 180, 177, 0.4);
-            width: 100%;
-            display: block;
-            text-decoration: none;
-            cursor: pointer;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .btn-registro:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(34, 180, 177, 0.6);
-            color: white;
+            max-width: 600px;
+            margin: 0 auto 100px auto;
         }
         
-        .floating-icon {
-            animation: floating 3s ease-in-out infinite;
-        }
-
-        @keyframes floating {
-            0% { transform: translate(0,  0px); }
-            50% { transform: translate(0, 15px); }
-            100% { transform: translate(0, -0px); }
-        }
-
-        /* --- ESTILOS REDES SOCIALES --- */
-        .social-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: auto; 
-            min-width: 240px; 
-            padding: 10px 20px; 
-            border-radius: 50px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-            transition: transform 0.2s ease; 
-            border: none;
-            font-size: 1rem; 
-            color: white !important; 
-        }
-
-        .social-btn:active {
-            transform: scale(1.05); 
-            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-        }
-
-        .ig-btn {
-            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-        }
-
-        .tk-btn {
-            background: #000000;
-        }
-
-        /* Contenedor del Carrusel */
-        #contenedor-carrusel {
+        .animacion-scroll {
             opacity: 0;
             transform: scale(0.8);
             transform-origin: top center;
-            width: 100%;
-            max-width: 600px;
-            margin-bottom: 100px;
-            transition: transform 0.1s ease-out, opacity 0.1s ease-out; 
+            transition: transform 0.1s ease-out, opacity 0.1s ease-out;
         }
 
-        .swiper {
-            width: 100%;
-            padding-top: 10px;
-            padding-bottom: 30px;
-        }
-        
-        .swiper-slide {
-            width: 75%;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-        }
-        
-        .swiper-slide:not(.swiper-slide-active) {
-            transform: scale(0.85);
-            opacity: 0.6;
-        }
-
-        .swiper-slide img {
-            width: 100%;
-            height: 280px;
-            object-fit: cover;
-            border-radius: 20px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-        }
+        .swiper { position: relative; z-index: 20; width: 100%; padding-top: 10px; padding-bottom: 30px; }
+        .swiper-slide { width: 75%; transition: transform 0.3s ease, opacity 0.3s ease; }
+        .swiper-slide:not(.swiper-slide-active) { transform: scale(0.85); opacity: 0.6; }
+        .swiper-slide img { width: 100%; height: 280px; object-fit: cover; border-radius: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.4); }
     </style>
 </head>
 <body>
 
-    <div class="glass-card text-center" data-aos="zoom-in" data-aos-duration="1000">
-        
-        <div class="mb-4 floating-icon" style="margin-top: -30px;">
-            <img src="logo-san-juan-diegooo.jpg" 
-                alt="Logo Parroquia San Juan Diego" 
-                class="img-fluid rounded-circle shadow-lg" 
-                style="width: 135px; height: 135px; object-fit: cover; border: 4px solid #6d05d4;">
+    <div class="ocean-container">
+        <div class="fish-track track-1">
+            <svg class="fish-svg" viewBox="0 0 100 40"><path fill="#51b5c9" d="M85,20 C65,5 30,5 15,20 C30,35 65,35 85,20 Z"/><path fill="#51b5c9" d="M18,20 L0,10 L5,20 L0,30 Z"/></svg>
         </div>
-
-        <h1 class="title-pascua mb-3">Pascua 2026</h1>
-
-        <p class="subtitle mb-1" style="color: #f04335;">
-            ¡Cristo Vive, con Él somos esperanza!
-        </p>
-        <p class="subtitle mb-4">
-            Prepárate para vivir la mejor experiencia de tu vida.
-        </p>
-
-        <div class="mb-4">
-            <div class="d-flex justify-content-center align-items-center mb-1" data-aos="fade-up" data-aos-delay="200">
-                <i class="far fa-calendar-alt me-2" style="color: #22b4b1; font-size: 1.2rem;"></i>
-                <span class="fw-bold" style="color: #2c3e50; font-size: 1.1rem;">Semana Santa 2026</span>
-            </div>
-            <div class="mb-3" data-aos="fade-up" data-aos-delay="250">
-                <span style="font-weight: 700; color: #555; background: rgba(34, 180, 177, 0.1); padding: 5px 15px; border-radius: 20px; font-size: 0.95rem;">
-                    30 marzo al 01 abril, 3pm a 8pm
-                </span>
-            </div>
-
-            <div class="d-flex justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="300">
-                <i class="fas fa-map-marker-alt me-2" style="color: #faa821; font-size: 1.2rem;"></i>
-                <span style="max-width: 300px; line-height: 1.4; font-weight: 600; color: #555;">
-                    Parroquia San Juan Diego<br>
-                    <small class="text-muted" style="font-weight: 500;">15 Av. Nte. Ote. 580, La Pimienta, 29034 Tuxtla Gutiérrez, Chiapas.</small>
-                </span>
-            </div>
+        <div class="fish-track track-2">
+            <svg class="fish-svg" viewBox="0 0 100 40"><path fill="#3da1b5" d="M85,20 C65,5 30,5 15,20 C30,35 65,35 85,20 Z"/><path fill="#3da1b5" d="M18,20 L0,10 L5,20 L0,30 Z"/></svg>
         </div>
-
-        <div class="info-box mb-4" data-aos="fade-left" data-aos-delay="400" data-aos-duration="1000">
-            <div class="info-title">
-                <i class="fas fa-backpack me-2"></i> ¿Qué necesitas llevar?
-            </div>
-            
-            <p class="mb-3 fw-bold" style="font-size: 0.95rem; color: #333; font-weight: 900;">
-                Lleva biblia, cuaderno y lapicero, paliacate, ropa deportiva y ropa extra.
-            </p>
-            
-            <div class="mb-3" style="font-size: 0.9rem; color: #555; font-weight: 600;">
-                <i class="fas fa-apple-alt me-1" style="color: #7abc44;"></i>
-                Te recomendamos traer un refrigerio ligero (lunch) para que nada te detenga. ¡Queremos que estés al 100%!
-            </div>
-            
-            <div class="p-3 rounded" style="background: rgba(255,255,255,0.7); border: 2px dashed #faa821;">
-                <h6 class="fw-bold mb-2 text-center" style="color: #faa821; text-transform: uppercase; font-weight: 900;">Opciones de Paquetes</h6>
-                <div class="d-flex align-items-center mb-2">
-                    <i class="fas fa-ticket-alt fs-5 me-3" style="color: #22b4b1;"></i>
-                    <div class="text-start">
-                        <strong style="color: #333; font-size: 1rem; font-weight: 900;">Paquete 1 - $85</strong><br>
-                        <span style="color: #555; font-size: 0.85rem; font-weight: 600;">Inscripción</span>
-                    </div>
-                </div>
-                <div class="d-flex align-items-center">
-                    <i class="fas fa-tshirt fs-5 me-3" style="color: #f04335;"></i>
-                    <div class="text-start">
-                        <strong style="color: #333; font-size: 1rem; font-weight: 900;">Paquete 2 - $220</strong><br>
-                        <span style="color: #555; font-size: 0.85rem; font-weight: 600;">Inscripción y playera</span>
-                    </div>
-                </div>
-            </div>
+        <div class="fish-track track-3">
+            <svg class="fish-svg" viewBox="0 0 100 40"><path fill="#51b5c9" d="M85,20 C65,5 30,5 15,20 C30,35 65,35 85,20 Z"/><path fill="#51b5c9" d="M18,20 L0,10 L5,20 L0,30 Z"/></svg>
         </div>
-
-        <form id="registroPascuaForm" class="mt-4 text-start" data-aos="fade-up" data-aos-delay="380" novalidate>
-            <h5 class="fw-bold mb-4 text-center" style="color: #2095da; font-weight: 900;">¡Asegura tu lugar!</h5>
-            
-            <label class="form-label-custom">Nombre completo <span class="asterisk">*</span></label>
-            <input type="text" name="entry.621081863" class="form-control-custom" placeholder="Tu respuesta" required data-nombre="Nombre completo">
-            
-            <label class="form-label-custom">Edad <span class="asterisk">*</span></label>
-            <input type="number" name="entry.1490454749" class="form-control-custom" placeholder="Tu respuesta" required data-nombre="Edad">
-            
-            <label class="form-label-custom">Teléfono (WhatsApp) <span class="asterisk">*</span> <small class="text-muted fw-normal" style="font-size: 0.75rem;">(10 dígitos)</small></label>
-            <input type="tel" name="entry.2007439274" class="form-control-custom" placeholder="Ej: 9611234567" required pattern="[0-9]{10}" maxlength="10" title="Debe contener exactamente 10 números" oninput="this.value = this.value.replace(/[^0-9]/g, '')" data-nombre="Teléfono (WhatsApp)">
-            
-            <label class="form-label-custom">Parroquia o Capilla de origen</label>
-            <input type="text" name="entry.523175738" class="form-control-custom" placeholder="Tu respuesta">
-            
-            <label class="form-label-custom">Nombre del contacto de emergencia (tutor) <span class="asterisk">*</span></label>
-            <input type="text" name="entry.517533376" class="form-control-custom" placeholder="Tu respuesta" required data-nombre="Nombre de contacto de emergencia">
-            
-            <label class="form-label-custom">Teléfono del contacto de emergencia <span class="asterisk">*</span> <small class="text-muted fw-normal" style="font-size: 0.75rem;">(10 dígitos)</small></label>
-            <input type="tel" name="entry.18630972" class="form-control-custom" placeholder="Ej: 9611234567" required pattern="[0-9]{10}" maxlength="10" title="Debe contener exactamente 10 números" oninput="this.value = this.value.replace(/[^0-9]/g, '')" data-nombre="Teléfono de emergencia">
-            
-            <label class="form-label-custom">¿Tienes alguna alergia o condición médica? (Opcional)</label>
-            <textarea class="form-control-custom" name="entry.76012710" rows="2" placeholder="Tu respuesta"></textarea>
-            
-            <div class="p-3 mb-4 rounded shadow-sm" style="background: rgba(255,255,255,0.85); border: 2px solid #22b4b1;">
-                <h6 class="fw-bold text-center mb-3" style="color: #22b4b1; font-weight: 800;">¡Lúcete con la playera oficial! 😍</h6>
-                
-                <div class="text-center mb-3">
-                    <img src="playera.jpg" alt="Playera Pascua 2026" class="img-fluid rounded shadow-sm" style="max-height: 200px; border: 3px solid white;">
-                </div>
-                
-                <label class="form-label-custom">¿Qué paquete vas a tomar? <span class="asterisk">*</span></label>
-                <select class="form-control-custom" name="entry.781424884" required style="cursor: pointer; appearance: auto;" data-nombre="Paquete">
-                    <option value="" disabled selected>Selecciona tu paquete...</option>
-                    <option value="PAQUETE 1">PAQUETE 1 (Solo inscripción)</option>
-                    <option value="PAQUETE 2">PAQUETE 2 (Inscripción + Playera)</option>
-                </select>
-                
-                <label class="form-label-custom">Talla <span class="asterisk">*</span></label>
-                <select class="form-control-custom mb-2" name="entry.83136480" required style="cursor: pointer; appearance: auto;" data-nombre="Talla">
-                    <option value="" disabled selected>Selecciona tu talla...</option>
-                    <option value="CHICA">CHICA</option>
-                    <option value="MEDIANA">MEDIANA</option>
-                    <option value="GRANDE">GRANDE</option>
-                    <option value="EXTRA GRANDE">EXTRA GRANDE</option>
-                </select>
-                
-                <p class="text-muted text-center m-0" style="font-size: 0.75rem; line-height: 1.2;">
-                    <em>*Por favor, selecciona tu talla sin importar el paquete que elijas. ¡Nos sirve de referencia por si te animas después! 😉</em>
-                </p>
-            </div>
-            
-            <button type="submit" id="btnGuardar" class="btn-registro mt-4" data-aos="pulse" data-aos-infinite="true">
-                GUARDAR REGISTRO
-            </button>
-        </form>
-
-        <div class="mt-5 p-4 rounded" style="background: rgba(255,255,255,0.8); border: 1px solid rgba(0,0,0,0.1);" data-aos="fade-up">
-            <span class="text-muted fw-bold d-block mb-3 text-center" style="font-size: 0.9rem;">¿Tienes dudas o necesitas más información?</span>
-            <div class="d-flex align-items-center justify-content-center mb-3">
-                <i class="fas fa-user-circle fs-3 me-2" style="color: #2095da;"></i>
-                <span class="fw-bold text-center" style="color: #333; font-size: 1.05rem;">Fátima Esmeralda Ferrer Navarro</span>
-            </div>
-            <a href="https://wa.me/529618530756?text=Hola,%20tengo%20una%20duda%20sobre%20la%20Pascua%202026" target="_blank" class="btn rounded-pill px-4 py-2 fw-bold shadow-sm text-white d-block mx-auto" style="text-decoration: none; background-color: #7abc44; width: fit-content;">
-                <i class="fab fa-whatsapp me-2 fs-5 align-middle"></i> Contactar por WhatsApp
-            </a>
-            
-            <div class="mt-4 pt-4 border-top border-secondary-subtle d-flex flex-column align-items-center gap-3">
-                <a href="https://www.instagram.com/daj.sjd?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
-                target="_blank" 
-                class="social-btn ig-btn text-decoration-none fw-bold text-center">
-                    <i class="fab fa-instagram fs-4 me-2"></i> Síguenos en Instagram
-                </a>
-                
-                <a href="https://www.tiktok.com/@daj.sjd" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                class="social-btn tk-btn text-decoration-none fw-bold text-center">
-                    <i class="fab fa-tiktok fs-4 me-2"></i> Síguenos en TikTok
-                </a>
-            </div>
+        <div class="fish-track track-4">
+            <svg class="fish-svg" viewBox="0 0 100 40"><path fill="#66c9db" d="M85,20 C65,5 30,5 15,20 C30,35 65,35 85,20 Z"/><path fill="#66c9db" d="M18,20 L0,10 L5,20 L0,30 Z"/></svg>
         </div>
-
+        <div class="fish-track track-5">
+            <svg class="fish-svg" viewBox="0 0 100 40"><path fill="#3da1b5" d="M85,20 C65,5 30,5 15,20 C30,35 65,35 85,20 Z"/><path fill="#3da1b5" d="M18,20 L0,10 L5,20 L0,30 Z"/></svg>
+        </div>
+        <div class="fish-track track-6">
+            <svg class="fish-svg" viewBox="0 0 100 40"><path fill="#51b5c9" d="M85,20 C65,5 30,5 15,20 C30,35 65,35 85,20 Z"/><path fill="#51b5c9" d="M18,20 L0,10 L5,20 L0,30 Z"/></svg>
+        </div>
     </div>
 
-    <div id="contenedor-carrusel">
-        <h3 class="text-center mb-3" style="font-weight: 900; color: #2095da; background: rgba(255,255,255,0.95); padding: 10px; border-radius: 10px; backdrop-filter: blur(5px); width: 90%; margin: 0 auto; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-            <i class="fas fa-camera-retro text-warning me-2"></i> Momentos Inolvidables de la Pascua 2025
-        </h3>
+    <div class="card-container">
         
-        <div class="swiper mySwiper">
+        <div class="glass-card-bg" data-aos="zoom-in" data-aos-duration="1000"></div>
+
+        <div class="glass-card-content" data-aos="zoom-in" data-aos-duration="1000">
+            <div class="mb-4 floating-icon" style="margin-top: -30px;">
+                <img src="logo-san-juan-diegooo.jpg" 
+                    alt="Logo Parroquia San Juan Diego" 
+                    class="img-fluid rounded-circle shadow-lg" 
+                    style="width: 135px; height: 135px; object-fit: cover; border: 4px solid #6d05d4;">
+            </div>
+
+            <h1 class="title-pascua mb-3">Pascua 2026</h1>
+
+            <p class="subtitle mb-1" style="color: #f04335;">
+                ¡Cristo Vive, con Él somos esperanza!
+            </p>
+            <p class="subtitle mb-4">
+                Prepárate para vivir la mejor experiencia de tu vida.
+            </p>
+
+            <div class="mb-4">
+                <div class="d-flex justify-content-center align-items-center mb-1" data-aos="fade-up" data-aos-delay="200">
+                    <i class="far fa-calendar-alt me-2" style="color: #22b4b1; font-size: 1.2rem;"></i>
+                    <span class="fw-bold" style="color: #2c3e50; font-size: 1.1rem;">Semana Santa 2026</span>
+                </div>
+                <div class="mb-3" data-aos="fade-up" data-aos-delay="250">
+                    <span style="font-weight: 700; color: #555; background: rgba(34, 180, 177, 0.1); padding: 5px 15px; border-radius: 20px; font-size: 0.95rem;">
+                        30 marzo al 01 abril, 3pm a 8pm
+                    </span>
+                </div>
+
+                <div class="d-flex justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fas fa-map-marker-alt me-2" style="color: #faa821; font-size: 1.2rem;"></i>
+                    <span style="max-width: 300px; line-height: 1.4; font-weight: 600; color: #555;">
+                        Parroquia San Juan Diego<br>
+                        <small class="text-muted" style="font-weight: 500;">15 Av. Nte. Ote. 580, La Pimienta, 29034 Tuxtla Gutiérrez, Chiapas.</small>
+                    </span>
+                </div>
+            </div>
+
+            <div class="info-box mb-4" data-aos="fade-left" data-aos-delay="400" data-aos-duration="1000">
+                <div class="info-title">
+                    <i class="fas fa-backpack me-2"></i> ¿Qué necesitas llevar?
+                </div>
+                
+                <p class="mb-3 fw-bold" style="font-size: 0.95rem; color: #333; font-weight: 900;">
+                    Lleva biblia, cuaderno y lapicero, paliacate, ropa deportiva y ropa extra.
+                </p>
+                
+                <div class="mb-3" style="font-size: 0.9rem; color: #555; font-weight: 600;">
+                    <i class="fas fa-apple-alt me-1" style="color: #7abc44;"></i>
+                    Te recomendamos traer un refrigerio ligero (lunch) para que nada te detenga. ¡Queremos que estés al 100%!
+                </div>
+                
+                <div class="p-3 rounded" style="background: rgba(255,255,255,0.7); border: 2px dashed #faa821;">
+                    <h6 class="fw-bold mb-2 text-center" style="color: #faa821; text-transform: uppercase; font-weight: 900;">Opciones de Paquetes</h6>
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="fas fa-ticket-alt fs-5 me-3" style="color: #22b4b1;"></i>
+                        <div class="text-start">
+                            <strong style="color: #333; font-size: 1rem; font-weight: 900;">Paquete 1 - $85</strong><br>
+                            <span style="color: #555; font-size: 0.85rem; font-weight: 600;">Inscripción</span>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-tshirt fs-5 me-3" style="color: #f04335;"></i>
+                        <div class="text-start">
+                            <strong style="color: #333; font-size: 1rem; font-weight: 900;">Paquete 2 - $220</strong><br>
+                            <span style="color: #555; font-size: 0.85rem; font-weight: 600;">Inscripción y playera</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <form id="registroPascuaForm" class="mt-4 text-start" data-aos="fade-up" data-aos-delay="380" novalidate>
+                <h5 class="fw-bold mb-4 text-center" style="color: #2095da; font-weight: 900;">¡Asegura tu lugar!</h5>
+                
+                <label class="form-label-custom">Nombre completo <span class="asterisk">*</span></label>
+                <input type="text" name="entry.621081863" class="form-control-custom" placeholder="Tu respuesta" required data-nombre="Nombre completo">
+                
+                <label class="form-label-custom">Edad <span class="asterisk">*</span></label>
+                <input type="number" name="entry.1490454749" class="form-control-custom" placeholder="Tu respuesta" required data-nombre="Edad">
+                
+                <label class="form-label-custom">Teléfono (WhatsApp) <span class="asterisk">*</span> <small class="text-muted fw-normal" style="font-size: 0.75rem;">(10 dígitos)</small></label>
+                <input type="tel" name="entry.2007439274" class="form-control-custom" placeholder="Ej: 9611234567" required pattern="[0-9]{10}" maxlength="10" title="Debe contener exactamente 10 números" oninput="this.value = this.value.replace(/[^0-9]/g, '')" data-nombre="Teléfono (WhatsApp)">
+                
+                <label class="form-label-custom">Parroquia o Capilla de origen</label>
+                <input type="text" name="entry.523175738" class="form-control-custom" placeholder="Tu respuesta">
+                
+                <label class="form-label-custom">Nombre del contacto de emergencia (tutor) <span class="asterisk">*</span></label>
+                <input type="text" name="entry.517533376" class="form-control-custom" placeholder="Tu respuesta" required data-nombre="Nombre de contacto de emergencia">
+                
+                <label class="form-label-custom">Teléfono del contacto de emergencia <span class="asterisk">*</span> <small class="text-muted fw-normal" style="font-size: 0.75rem;">(10 dígitos)</small></label>
+                <input type="tel" name="entry.18630972" class="form-control-custom" placeholder="Ej: 9611234567" required pattern="[0-9]{10}" maxlength="10" title="Debe contener exactamente 10 números" oninput="this.value = this.value.replace(/[^0-9]/g, '')" data-nombre="Teléfono de emergencia">
+                
+                <label class="form-label-custom">¿Tienes alguna alergia o condición médica? (Opcional)</label>
+                <textarea class="form-control-custom" name="entry.76012710" rows="2" placeholder="Tu respuesta"></textarea>
+                
+                <div class="p-3 mb-4 rounded shadow-sm" style="background: rgba(255,255,255,0.85); border: 2px solid #22b4b1;">
+                    <h6 class="fw-bold text-center mb-3" style="color: #22b4b1; font-weight: 800;">¡Lúcete con la playera oficial! 😍</h6>
+                    
+                    <div class="text-center mb-3">
+                        <img src="playera.jpg" alt="Playera Pascua 2026" class="img-fluid rounded shadow-sm" style="max-height: 200px; border: 3px solid white;">
+                    </div>
+                    
+                    <label class="form-label-custom">¿Qué paquete vas a tomar? <span class="asterisk">*</span></label>
+                    <select class="form-control-custom" name="entry.781424884" required style="cursor: pointer; appearance: auto;" data-nombre="Paquete">
+                        <option value="" disabled selected>Selecciona tu paquete...</option>
+                        <option value="PAQUETE 1">PAQUETE 1 (Solo inscripción)</option>
+                        <option value="PAQUETE 2">PAQUETE 2 (Inscripción + Playera)</option>
+                    </select>
+                    
+                    <label class="form-label-custom">Talla <span class="asterisk">*</span></label>
+                    <select class="form-control-custom mb-2" name="entry.83136480" required style="cursor: pointer; appearance: auto;" data-nombre="Talla">
+                        <option value="" disabled selected>Selecciona tu talla...</option>
+                        <option value="CHICA">CHICA</option>
+                        <option value="MEDIANA">MEDIANA</option>
+                        <option value="GRANDE">GRANDE</option>
+                        <option value="EXTRA GRANDE">EXTRA GRANDE</option>
+                    </select>
+                    
+                    <p class="text-muted text-center m-0" style="font-size: 0.75rem; line-height: 1.2;">
+                        <em>*Por favor, selecciona tu talla sin importar el paquete que elijas. ¡Nos sirve de referencia por si te animas después! 😉</em>
+                    </p>
+                </div>
+                
+                <button type="submit" id="btnGuardar" class="btn-registro mt-4" data-aos="pulse" data-aos-infinite="true">
+                    GUARDAR REGISTRO
+                </button>
+            </form>
+
+            <div class="mt-5 p-4 rounded" style="background: rgba(255,255,255,0.8); border: 1px solid rgba(0,0,0,0.1);" data-aos="fade-up">
+                <span class="text-muted fw-bold d-block mb-3 text-center" style="font-size: 0.9rem;">¿Tienes dudas o necesitas más información?</span>
+                <div class="d-flex align-items-center justify-content-center mb-3">
+                    <i class="fas fa-user-circle fs-3 me-2" style="color: #2095da;"></i>
+                    <span class="fw-bold text-center" style="color: #333; font-size: 1.05rem;">Fátima Esmeralda Ferrer Navarro</span>
+                </div>
+                <a href="https://wa.me/529618530756?text=Hola,%20tengo%20una%20duda%20sobre%20la%20Pascua%202026" target="_blank" class="btn rounded-pill px-4 py-2 fw-bold shadow-sm text-white d-block mx-auto" style="text-decoration: none; background-color: #7abc44; width: fit-content;">
+                    <i class="fab fa-whatsapp me-2 fs-5 align-middle"></i> Contactar por WhatsApp
+                </a>
+                
+                <div class="mt-4 pt-4 border-top border-secondary-subtle d-flex flex-column align-items-center gap-3">
+                    <a href="https://www.instagram.com/daj.sjd?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
+                    target="_blank" 
+                    class="social-btn ig-btn text-decoration-none fw-bold text-center">
+                        <i class="fab fa-instagram fs-4 me-2"></i> Síguenos en Instagram
+                    </a>
+                    
+                    <a href="https://www.tiktok.com/@daj.sjd" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    class="social-btn tk-btn text-decoration-none fw-bold text-center">
+                        <i class="fab fa-tiktok fs-4 me-2"></i> Síguenos en TikTok
+                    </a>
+                </div>
+            </div>
+
+        </div> 
+    </div> 
+    
+    <div class="wrapper-scroll-ref" id="wrapper-scroll-ref">
+        
+        <div style="position: relative; width: 90%; margin: 0 auto 1rem auto;">
+            <div class="animacion-scroll" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.95); backdrop-filter: blur(5px); border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); z-index: 5;"></div>
+            
+            <h3 class="animacion-scroll text-center m-0" style="position: relative; z-index: 15; font-weight: 900; color: #2095da; padding: 10px;">
+                <i class="fas fa-camera-retro text-warning me-2"></i> Momentos Inolvidables de la Pascua 2025
+            </h3>
+        </div>
+        
+        <div class="swiper mySwiper animacion-scroll">
             <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <img src="reina_sonriendo.jpg" alt="Foto Pascua 1">
-                </div>
-                <div class="swiper-slide">
-                    <img src="celebrando.jpg" alt="Foto Pascua 2">
-                </div>
-                <div class="swiper-slide">
-                    <img src="muan_mojado.jpg" alt="Foto Pascua 3">
-                </div>
-                <div class="swiper-slide">
-                    <img src="ninos3.jpg" alt="Foto Pascua 4">
-                </div>
-                <div class="swiper-slide">
-                    <img src="juan_saltando.jpg" alt="Foto Pascua 5">
-                </div>
-                <div class="swiper-slide">
-                    <img src="aron_ebrio.jpg" alt="Foto Pascua 6">
-                </div>
-                <div class="swiper-slide">
-                    <img src="muman_feliz.jpg" alt="Foto Pascua 7">
-                </div>
+                <div class="swiper-slide"><img src="reina_sonriendo.jpg" alt="Foto Pascua 1"></div>
+                <div class="swiper-slide"><img src="celebrando.jpg" alt="Foto Pascua 2"></div>
+                <div class="swiper-slide"><img src="muan_mojado.jpg" alt="Foto Pascua 3"></div>
+                <div class="swiper-slide"><img src="ninos3.jpg" alt="Foto Pascua 4"></div>
+                <div class="swiper-slide"><img src="juan_saltando.jpg" alt="Foto Pascua 5"></div>
+                <div class="swiper-slide"><img src="aron_ebrio.jpg" alt="Foto Pascua 6"></div>
+                <div class="swiper-slide"><img src="muman_feliz.jpg" alt="Foto Pascua 7"></div>
             </div>
         </div>
     </div>
@@ -430,17 +419,58 @@
         const altoOriginal = window.innerHeight;
 
         window.addEventListener('scroll', () => {
-            const carrusel = document.getElementById('contenedor-carrusel');
-            const rect = carrusel.getBoundingClientRect();
+            const rectWrapper = document.getElementById('wrapper-scroll-ref').getBoundingClientRect();
             
-            let visibilidad = (altoOriginal - rect.top) / (altoOriginal * 0.5);
+            let visibilidad = (altoOriginal - rectWrapper.top) / (altoOriginal * 0.5);
             visibilidad = Math.max(0, Math.min(1, visibilidad));
             
             const escala = 0.8 + (0.2 * visibilidad);
             
-            carrusel.style.transform = `scale(${escala})`;
-            carrusel.style.opacity = visibilidad * 1.5; 
+            const elementos = document.querySelectorAll('.animacion-scroll');
+            elementos.forEach(el => {
+                el.style.transform = `scale(${escala})`;
+                el.style.opacity = visibilidad * 1.5;
+            });
         });
+
+        // --- LÓGICA DE INTERACCIÓN REPARADA ---
+        const ocean = document.querySelector('.ocean-container');
+        let scareTimeout;
+
+        function scareFishes() {
+            // Añade la clase que los hunde rapidísimo
+            ocean.classList.add('fleeing');
+            clearTimeout(scareTimeout);
+            
+            // Apenas 400ms después, quitamos la clase.
+            // Al quitarla, el CSS los hace regresar lentamente (8 segundos)
+            scareTimeout = setTimeout(() => {
+                ocean.classList.remove('fleeing');
+            }, 400); 
+        }
+
+        function createRipple(x, y) {
+            const ripple = document.createElement('div');
+            ripple.className = 'water-ripple';
+            ripple.style.left = `${x}px`;
+            ripple.style.top = `${y}px`;
+            document.body.appendChild(ripple);
+            
+            setTimeout(() => { ripple.remove(); }, 800);
+        }
+
+        // Puedes tocar varias veces y el efecto se reiniciará perfecto
+        document.addEventListener('click', (e) => {
+            scareFishes();
+            createRipple(e.clientX, e.clientY);
+        });
+
+        document.addEventListener('touchstart', (e) => {
+            scareFishes();
+            createRipple(e.touches[0].clientX, e.touches[0].clientY);
+        }, {passive: true});
+
+        // --- FIN LÓGICA DE INTERACCIÓN ---
 
         const form = document.getElementById('registroPascuaForm');
         const btnGuardar = document.getElementById('btnGuardar');
@@ -448,36 +478,28 @@
         form.addEventListener('submit', function(e) {
             e.preventDefault(); 
             
-            // --- VALIDACIÓN TIPO DATA ANNOTATION ---
-            // Revisamos todos los campos que tengan "required"
             const camposRequeridos = form.querySelectorAll('[required]');
             let formularioValido = true;
             let campoFaltante = "";
 
-            // Buscamos el primero que esté vacío o inválido
             for (let campo of camposRequeridos) {
                 if (!campo.value.trim() || !campo.checkValidity()) {
                     formularioValido = false;
-                    // Obtenemos el nombre amigable que pusimos en data-nombre
                     campoFaltante = campo.getAttribute('data-nombre'); 
-                    // Ponemos el foco en ese campo
                     campo.focus();
                     break; 
                 }
             }
 
-            // Si falta algo, lanzamos la alerta de error y detenemos el envío
             if (!formularioValido) {
                 Swal.fire({
                     title: 'Faltan datos',
-                    // Cambiamos "text" por "html" y le damos estilo de negrita suave al campo
                     html: `Por favor, completa correctamente el campo: <span style="font-weight: 700; color: #2095da !important; font-size: 1.15rem;">${campoFaltante}</span>`,
                     icon: 'warning',
                     confirmButtonColor: '#f04335' 
                 });
-                return; // Corta la ejecución aquí
+                return; 
             }
-            // --- FIN DE VALIDACIÓN ---
 
             const textoOriginal = btnGuardar.innerHTML;
             btnGuardar.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
@@ -511,9 +533,7 @@
                 btnGuardar.disabled = false;
             });
         });
-    </script>
-    
-    <script>
+
         if ('scrollRestoration' in history) {
             history.scrollRestoration = 'manual';
         }
