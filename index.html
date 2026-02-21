@@ -18,7 +18,6 @@
     <style>
         /* --- ESTILOS PERSONALIZADOS --- */
         body {
-            /* Usamos la nueva fuente Poppins */
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
             background-size: 400% 400%;
@@ -161,60 +160,30 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: auto; /* Quitamos el 90% para que no sean gordos */
-            min-width: 240px; /* Asegura que ambos botones midan lo mismo */
-            padding: 10px 20px; /* Reducimos lo alto del botón */
+            width: auto; 
+            min-width: 240px; 
+            padding: 10px 20px; /* Padding reducido para quitar lo "gordo" */
             border-radius: 50px;
-            background: rgba(255, 255, 255, 0.7); 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-            border: 2px solid transparent;
-            font-size: 1rem; /* Letra un poco más discreta */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            transition: transform 0.2s ease; 
+            border: none;
+            font-size: 1rem; 
+            color: white !important; /* Texto y logo blancos siempre */
         }
 
         .social-btn:active {
-            transform: scale(0.92) translateY(2px);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transform: scale(1.05); /* Se agranda al presionarlo en el celular */
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
         }
 
-        .social-btn i {
-            transition: transform 0.3s ease, color 0.3s ease;
-        }
-
-        /* Botón Instagram */
+        /* Botón Instagram con fondo fijo */
         .ig-btn {
-            color: #E1306C;
-        }
-        .ig-btn i {
-            color: #E1306C;
-        }
-        .ig-btn:hover, .ig-btn:focus, .ig-btn:active {
             background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-            color: white !important;
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 10px 25px rgba(225, 48, 108, 0.3);
-        }
-        .ig-btn:hover i, .ig-btn:focus i, .ig-btn:active i {
-            color: white;
-            transform: scale(1.2);
         }
 
-        /* Botón TikTok */
+        /* Botón TikTok con fondo fijo */
         .tk-btn {
-            color: #000000;
-        }
-        .tk-btn i {
-            color: #000000;
-        }
-        .tk-btn:hover, .tk-btn:focus, .tk-btn:active {
             background: #000000;
-            color: white !important;
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-        }
-        .tk-btn:hover i, .tk-btn:focus i, .tk-btn:active i {
-            color: white;
-            transform: scale(1.2);
         }
 
         /* Contenedor del Carrusel */
@@ -266,8 +235,11 @@
 
         <h1 class="title-pascua mb-3">Pascua 2026</h1>
         
+        <p class="subtitle mb-1">
+            ¡Cristo Vive, con Él somos esperanza!
+        </p>
         <p class="subtitle mb-4">
-            ¡Cristo Vive, con Él somos esperanza! Prepárate para vivir la mejor experiencia de tu vida.
+            Prepárate para vivir la mejor experiencia de tu vida.
         </p>
 
         <div class="mb-4">
