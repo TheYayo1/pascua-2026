@@ -107,30 +107,30 @@
             transition: transform 0.3s ease-in, opacity 0.2s ease-in;
         }
 
-        /* Rutas exactas con rotación pura (así siempre ven al frente) */
-        .track-1 { top: 25%; animation: swimRight 22s linear infinite; }
-        .track-2 { top: 75%; animation: swimRight 28s linear infinite 5s; width: 50px; height: 18px; }
+        /* Rutas exactas con rotación pura y la palabra 'backwards' para que no se congelen */
+        .track-1 { top: 25%; animation: swimRight 22s linear infinite backwards; }
+        .track-2 { top: 75%; animation: swimRight 28s linear infinite 5s backwards; width: 50px; height: 18px; }
         @keyframes swimRight {
             0% { left: -150px; transform: rotate(0deg) translateY(0); }
             50% { transform: rotate(0deg) translateY(-25px); }
             100% { left: 100vw; transform: rotate(0deg) translateY(0); }
         }
 
-        .track-3 { top: 35%; animation: swimLeft 24s linear infinite 2s; width: 80px; height: 30px; }
-        .track-4 { top: 85%; animation: swimLeft 30s linear infinite 10s; width: 45px; height: 15px;}
+        .track-3 { top: 35%; animation: swimLeft 24s linear infinite 2s backwards; width: 80px; height: 30px; }
+        .track-4 { top: 85%; animation: swimLeft 30s linear infinite 10s backwards; width: 45px; height: 15px;}
         @keyframes swimLeft {
             0% { left: 100vw; transform: rotate(180deg) translateY(0); }
             50% { transform: rotate(180deg) translateY(25px); }
             100% { left: -150px; transform: rotate(180deg) translateY(0); }
         }
 
-        .track-5 { animation: swimDiagDown 32s linear infinite 3s; width: 55px; height: 20px;}
+        .track-5 { animation: swimDiagDown 32s linear infinite 3s backwards; width: 55px; height: 20px;}
         @keyframes swimDiagDown {
             0% { top: -100px; left: -100px; transform: rotate(35deg); }
             100% { top: 120vh; left: 120vw; transform: rotate(35deg); }
         }
 
-        .track-6 { animation: swimDiagUp 26s linear infinite 8s; }
+        .track-6 { animation: swimDiagUp 26s linear infinite 8s backwards; }
         @keyframes swimDiagUp {
             0% { top: 120vh; left: 120vw; transform: rotate(215deg); }
             100% { top: -100px; left: -100px; transform: rotate(215deg); }
