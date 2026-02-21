@@ -164,40 +164,58 @@
             width: 90%;
             padding: 12px 20px;
             border-radius: 50px;
-            background: rgba(255, 255, 255, 0.5);
-            color: #555;
+            background: rgba(255, 255, 255, 0.7); /* Ligeramente más opaco para resaltar el color */
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            /* cubic-bezier hace que el rebote se vea elástico y fluido */
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
             border: 2px solid transparent;
-        }
-
-        .social-btn:hover, .social-btn:focus {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-            background: white;
-            color: #333;
+            font-size: 1.1rem;
         }
 
         .social-btn:active {
-            transform: scale(0.92) translateY(2px); /* Efecto de hundimiento fuerte al dar click */
+            transform: scale(0.92) translateY(2px);
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        .ig-btn:hover i {
-            color: #E1306C;
-            transform: scale(1.2);
-            transition: transform 0.3s ease;
-        }
-
-        .tk-btn:hover i {
-            color: #000000;
-            transform: scale(1.2);
-            transition: transform 0.3s ease;
-        }
-
         .social-btn i {
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        /* Botón Instagram */
+        .ig-btn {
+            color: #E1306C; /* Texto e icono color rosa/rojo por defecto */
+        }
+        .ig-btn i {
+            color: #E1306C;
+        }
+        .ig-btn:hover, .ig-btn:focus, .ig-btn:active {
+            /* Al presionar: Fondo degradado de Instagram, letras e icono blancos */
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: white !important;
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(225, 48, 108, 0.3);
+        }
+        .ig-btn:hover i, .ig-btn:focus i, .ig-btn:active i {
+            color: white;
+            transform: scale(1.2);
+        }
+
+        /* Botón TikTok */
+        .tk-btn {
+            color: #000000; /* Texto e icono negro por defecto */
+        }
+        .tk-btn i {
+            color: #000000;
+        }
+        .tk-btn:hover, .tk-btn:focus, .tk-btn:active {
+            /* Al presionar: Fondo negro, letras e icono blancos */
+            background: #000000;
+            color: white !important;
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+        .tk-btn:hover i, .tk-btn:focus i, .tk-btn:active i {
+            color: white;
+            transform: scale(1.2);
         }
 
         /* Contenedor del Carrusel */
