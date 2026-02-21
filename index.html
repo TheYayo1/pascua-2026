@@ -161,14 +161,15 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 90%;
-            padding: 12px 20px;
+            width: auto; /* Quitamos el 90% para que no sean gordos */
+            min-width: 240px; /* Asegura que ambos botones midan lo mismo */
+            padding: 10px 20px; /* Reducimos lo alto del botón */
             border-radius: 50px;
-            background: rgba(255, 255, 255, 0.7); /* Ligeramente más opaco para resaltar el color */
+            background: rgba(255, 255, 255, 0.7); 
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
             border: 2px solid transparent;
-            font-size: 1.1rem;
+            font-size: 1rem; /* Letra un poco más discreta */
         }
 
         .social-btn:active {
@@ -182,13 +183,12 @@
 
         /* Botón Instagram */
         .ig-btn {
-            color: #E1306C; /* Texto e icono color rosa/rojo por defecto */
+            color: #E1306C;
         }
         .ig-btn i {
             color: #E1306C;
         }
         .ig-btn:hover, .ig-btn:focus, .ig-btn:active {
-            /* Al presionar: Fondo degradado de Instagram, letras e icono blancos */
             background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
             color: white !important;
             transform: translateY(-5px) scale(1.05);
@@ -201,13 +201,12 @@
 
         /* Botón TikTok */
         .tk-btn {
-            color: #000000; /* Texto e icono negro por defecto */
+            color: #000000;
         }
         .tk-btn i {
             color: #000000;
         }
         .tk-btn:hover, .tk-btn:focus, .tk-btn:active {
-            /* Al presionar: Fondo negro, letras e icono blancos */
             background: #000000;
             color: white !important;
             transform: translateY(-5px) scale(1.05);
