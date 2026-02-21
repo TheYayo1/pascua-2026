@@ -16,10 +16,11 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
-        /* --- ESTILOS PERSONALIZADOS --- */
+        /* --- ESTILOS PERSONALIZADOS CON PALETA DEL FLYER --- */
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            /* Nuevo fondo animado con los colores: Turquesa, Azul fuerte y Verde limón */
+            background: linear-gradient(-45deg, #22b4b1, #2095da, #7abc44, #22b4b1);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
             min-height: 100vh;
@@ -38,12 +39,12 @@
         }
 
         .glass-card {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95); /* Un poco más blanco para que el texto resalte mejor */
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px 0 rgba(32, 149, 218, 0.3); /* Sombra azulada */
             padding: 3rem 2rem;
             max-width: 450px;
             width: 90%;
@@ -51,7 +52,7 @@
         }
 
         .title-pascua {
-            color: #2c3e50;
+            color: #2095da; /* Azul fuerte del flyer */
             font-weight: 900;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -60,12 +61,12 @@
         .subtitle {
             color: #555;
             font-size: 1.1rem;
-            font-weight: 500;
+            font-weight: 600;
         }
 
         .info-box {
             background: rgba(255, 255, 255, 0.8);
-            border-left: 5px solid #e73c7e;
+            border-left: 5px solid #f04335; /* Borde rojo del flyer */
             border-radius: 10px;
             padding: 1.2rem;
             text-align: left;
@@ -78,7 +79,7 @@
         }
 
         .info-title {
-            color: #e73c7e;
+            color: #f04335; /* Rojo del flyer */
             font-weight: 800;
             font-size: 1.1rem;
             margin-bottom: 8px;
@@ -88,14 +89,14 @@
         .form-label-custom {
             font-weight: 700;
             font-size: 0.9rem;
-            color: #2c3e50;
+            color: #2095da; /* Azul fuerte para las preguntas */
             margin-bottom: 4px;
             display: block;
         }
 
         .form-control-custom {
             background: rgba(255, 255, 255, 0.7);
-            border: 1px solid rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(34, 180, 177, 0.3); /* Borde turquesa claro */
             border-radius: 10px;
             padding: 10px 15px;
             margin-bottom: 15px;
@@ -104,26 +105,29 @@
             transition: all 0.3s ease;
             font-size: 1rem;
             font-family: 'Poppins', sans-serif;
+            font-weight: 500;
         }
 
         .form-control-custom::placeholder {
             color: rgba(0, 0, 0, 0.4);
+            font-weight: 400;
         }
 
         .form-control-custom:focus {
             background: rgba(255, 255, 255, 1);
             outline: none;
-            box-shadow: 0 0 10px rgba(231, 60, 126, 0.3);
-            border-color: #e73c7e;
+            box-shadow: 0 0 10px rgba(34, 180, 177, 0.4);
+            border-color: #22b4b1; /* Turquesa al hacer focus */
         }
 
         .asterisk {
-            color: #dc3545;
+            color: #f04335; /* Rojo del flyer para los obligatorios */
             font-weight: bold;
         }
 
         .btn-registro {
-            background: linear-gradient(45deg, #11998e, #38ef7d);
+            /* Botón con gradiente Verde Limón a Turquesa */
+            background: linear-gradient(45deg, #7abc44, #22b4b1);
             border: none;
             color: white;
             padding: 15px 30px;
@@ -131,7 +135,7 @@
             font-weight: 800;
             border-radius: 50px;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(34, 180, 177, 0.4);
             width: 100%;
             display: block;
             text-decoration: none;
@@ -141,7 +145,7 @@
 
         .btn-registro:hover {
             transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 6px 20px rgba(34, 180, 177, 0.6);
             color: white;
         }
         
@@ -155,33 +159,31 @@
             100% { transform: translate(0, -0px); }
         }
 
-        /* --- NUEVOS ESTILOS PARA REDES SOCIALES --- */
+        /* --- ESTILOS REDES SOCIALES --- */
         .social-btn {
             display: flex;
             align-items: center;
             justify-content: center;
             width: auto; 
             min-width: 240px; 
-            padding: 10px 20px; /* Padding reducido para quitar lo "gordo" */
+            padding: 10px 20px; 
             border-radius: 50px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.15);
             transition: transform 0.2s ease; 
             border: none;
             font-size: 1rem; 
-            color: white !important; /* Texto y logo blancos siempre */
+            color: white !important; 
         }
 
         .social-btn:active {
-            transform: scale(1.05); /* Se agranda al presionarlo en el celular */
+            transform: scale(1.05); 
             box-shadow: 0 6px 20px rgba(0,0,0,0.25);
         }
 
-        /* Botón Instagram con fondo fijo */
         .ig-btn {
             background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
         }
 
-        /* Botón TikTok con fondo fijo */
         .tk-btn {
             background: #000000;
         }
@@ -219,6 +221,7 @@
             object-fit: cover;
             border-radius: 20px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            border: 3px solid white; /* Borde blanco para que parezcan fotos impresas */
         }
     </style>
 </head>
@@ -230,13 +233,12 @@
             <img src="logo-san-juan-diegooo.jpg" 
                 alt="Logo Parroquia San Juan Diego" 
                 class="img-fluid rounded-circle shadow-lg" 
-                style="width: 150px; height: 150px; object-fit: cover; border: 4px solid white;">
+                style="width: 150px; height: 150px; object-fit: cover; border: 4px solid #2095da;">
         </div>
 
-        <h1 class="title-pascua mb-3">Pascua 2026</h1>
+        <h1 class="title-pascua mb-3">Pascua Juvenil 2026</h1>
         
-        <p class="subtitle mb-1">
-            ¡Cristo Vive, con Él somos esperanza!
+        <p class="subtitle mb-1" style="color: #f04335;"> ¡Cristo Vive, con Él somos esperanza!
         </p>
         <p class="subtitle mb-4">
             Prepárate para vivir la mejor experiencia de tu vida.
@@ -244,20 +246,18 @@
 
         <div class="mb-4">
             <div class="d-flex justify-content-center align-items-center mb-1" data-aos="fade-up" data-aos-delay="200">
-                <i class="far fa-calendar-alt me-2 text-primary"></i>
-                <span class="fw-bold" style="color: #2c3e50; font-size: 1.1rem;">Semana Santa 2026</span>
+                <i class="far fa-calendar-alt me-2" style="color: #22b4b1; font-size: 1.2rem;"></i> <span class="fw-bold" style="color: #2c3e50; font-size: 1.1rem;">Semana Santa 2026</span>
             </div>
             <div class="mb-3" data-aos="fade-up" data-aos-delay="250">
-                <span style="font-weight: 700; color: #555; background: rgba(0,0,0,0.05); padding: 5px 15px; border-radius: 20px; font-size: 0.95rem;">
+                <span style="font-weight: 700; color: #555; background: rgba(34, 180, 177, 0.1); padding: 5px 15px; border-radius: 20px; font-size: 0.95rem;">
                     30 marzo al 01 abril, 3pm a 8pm
                 </span>
             </div>
 
             <div class="d-flex justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="300">
-                <i class="fas fa-map-marker-alt me-2 text-danger"></i>
-                <span style="max-width: 300px; line-height: 1.4; font-weight: 500; color: #555;">
+                <i class="fas fa-map-marker-alt me-2" style="color: #faa821; font-size: 1.2rem;"></i> <span style="max-width: 300px; line-height: 1.4; font-weight: 600; color: #555;">
                     Parroquia San Juan Diego<br>
-                    <small class="text-muted">15 Av. Nte. Ote. 580, La Pimienta, 29034 Tuxtla Gutiérrez, Chiapas.</small>
+                    <small class="text-muted" style="font-weight: 500;">15 Av. Nte. Ote. 580, La Pimienta, 29034 Tuxtla Gutiérrez, Chiapas.</small>
                 </span>
             </div>
         </div>
@@ -267,27 +267,24 @@
                 <i class="fas fa-backpack me-2"></i> ¿Qué necesitas llevar?
             </div>
             
-            <p class="mb-3 fw-bold" style="font-size: 0.95rem; color: #333;">
-                Lleva biblia, cuaderno y lapicero, paliacate (pañuelo), ropa deportiva y ropa extra.
+            <p class="mb-3 fw-bold" style="font-size: 0.95rem; color: #333; font-weight: 900;">
+                Lleva biblia, cuaderno y lapicero, paliacate, ropa deportiva y ropa extra.
             </p>
             
             <div class="mb-3" style="font-size: 0.9rem; color: #555; font-weight: 600;">
-                <i class="fas fa-apple-alt me-1 text-success"></i> Te recomendamos traer un refrigerio ligero (lunch) para que nada te detenga durante las actividades. ¡Queremos que estés al 100%!
+                <i class="fas fa-apple-alt me-1" style="color: #7abc44;"></i> Te recomendamos traer un refrigerio ligero (lunch) para que nada te detenga. ¡Queremos que estés al 100%!
             </div>
             
-            <div class="p-3 rounded" style="background: rgba(255,255,255,0.7); border: 2px dashed #e73c7e;">
-                <h6 class="fw-bold mb-2 text-center" style="color: #e73c7e; text-transform: uppercase;">Opciones de Paquetes</h6>
+            <div class="p-3 rounded" style="background: rgba(255,255,255,0.7); border: 2px dashed #faa821;"> <h6 class="fw-bold mb-2 text-center" style="color: #faa821; text-transform: uppercase; font-weight: 900;">Opciones de Paquetes</h6>
                 <div class="d-flex align-items-center mb-2">
-                    <i class="fas fa-ticket-alt fs-5 me-3 text-info"></i>
-                    <div class="text-start">
-                        <strong style="color: #333; font-size: 1rem;">Paquete 1 - $85</strong><br>
+                    <i class="fas fa-ticket-alt fs-5 me-3" style="color: #22b4b1;"></i> <div class="text-start">
+                        <strong style="color: #333; font-size: 1rem; font-weight: 900;">Paquete 1 - $85</strong><br>
                         <span style="color: #555; font-size: 0.85rem; font-weight: 600;">Inscripción</span>
                     </div>
                 </div>
                 <div class="d-flex align-items-center">
-                    <i class="fas fa-tshirt fs-5 me-3 text-warning"></i>
-                    <div class="text-start">
-                        <strong style="color: #333; font-size: 1rem;">Paquete 2 - $220</strong><br>
+                    <i class="fas fa-tshirt fs-5 me-3" style="color: #f04335;"></i> <div class="text-start">
+                        <strong style="color: #333; font-size: 1rem; font-weight: 900;">Paquete 2 - $220</strong><br>
                         <span style="color: #555; font-size: 0.85rem; font-weight: 600;">Inscripción y playera</span>
                     </div>
                 </div>
@@ -295,7 +292,7 @@
         </div>
 
         <form id="registroPascuaForm" class="mt-4 text-start" data-aos="fade-up" data-aos-delay="500">
-            <h5 class="fw-bold mb-4 text-center" style="color: #2c3e50;">¡Asegura tu lugar!</h5>
+            <h5 class="fw-bold mb-4 text-center" style="color: #2095da; font-weight: 900;">¡Asegura tu lugar!</h5>
             
             <label class="form-label-custom">Nombre completo <span class="asterisk">*</span></label>
             <input type="text" name="entry.621081863" class="form-control-custom" placeholder="Tu respuesta" required>
@@ -340,12 +337,12 @@
         </form>
 
         <div class="mt-5 p-4 rounded" style="background: rgba(255,255,255,0.8); border: 1px solid rgba(0,0,0,0.1);" data-aos="fade-up">
-            <span class="text-muted fw-bold d-block mb-3" style="font-size: 0.9rem;">¿Tienes dudas o necesitas más información?</span>
+            <span class="text-muted fw-bold d-block mb-3 text-center" style="font-size: 0.9rem;">¿Tienes dudas o necesitas más información?</span>
             <div class="d-flex align-items-center justify-content-center mb-3">
-                <i class="fas fa-user-circle fs-3 me-2" style="color: #2c3e50;"></i>
-                <span class="fw-bold" style="color: #333; font-size: 1.05rem;">Fátima Esmeralda Ferrer Navarro</span>
+                <i class="fas fa-user-circle fs-3 me-2" style="color: #2095da;"></i>
+                <span class="fw-bold text-center" style="color: #333; font-size: 1.05rem;">Fátima Esmeralda Ferrer Navarro</span>
             </div>
-            <a href="https://wa.me/529618530756?text=Hola,%20tengo%20una%20duda%20sobre%20la%20Pascua%202026" target="_blank" class="btn btn-success rounded-pill px-4 py-2 fw-bold shadow-sm text-white" style="text-decoration: none;">
+            <a href="https://wa.me/529618530756?text=Hola,%20tengo%20una%20duda%20sobre%20la%20Pascua%202026" target="_blank" class="btn rounded-pill px-4 py-2 fw-bold shadow-sm text-white d-block mx-auto" style="text-decoration: none; background-color: #7abc44; width: fit-content;">
                 <i class="fab fa-whatsapp me-2 fs-5 align-middle"></i> Contactar por WhatsApp
             </a>
             
@@ -368,8 +365,8 @@
     </div>
 
     <div id="contenedor-carrusel">
-        <h3 class="text-center mb-3" style="font-weight: 800; color: #2c3e50; background: rgba(255,255,255,0.85); padding: 10px; border-radius: 10px; backdrop-filter: blur(5px); width: 90%; margin: 0 auto;">
-            <i class="fas fa-camera-retro text-danger"></i> Momentos Inolvidables
+        <h3 class="text-center mb-3" style="font-weight: 900; color: #2095da; background: rgba(255,255,255,0.95); padding: 10px; border-radius: 10px; backdrop-filter: blur(5px); width: 90%; margin: 0 auto; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+            <i class="fas fa-camera-retro text-warning me-2"></i> Momentos Inolvidables
         </h3>
         
         <div class="swiper mySwiper">
@@ -436,7 +433,7 @@
             e.preventDefault(); 
             
             const textoOriginal = btnGuardar.innerHTML;
-            btnGuardar.innerHTML = 'Enviando...';
+            btnGuardar.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
             btnGuardar.disabled = true;
 
             const actionURL = "https://docs.google.com/forms/d/e/1FAIpQLSdABoef75mrI1n3G9SAleT7AF5Eg4uD2jVRSgsieE8JFqm5aw/formResponse";
@@ -451,7 +448,7 @@
                     title: '¡Registro Exitoso! 🎉',
                     text: 'Prepárate con todo el ánimo porque vas a vivir una experiencia inolvidable. ¡Nos vemos en Pascua!',
                     icon: 'success',
-                    confirmButtonColor: '#11998e',
+                    confirmButtonColor: '#22b4b1', /* Turquesa */
                     confirmButtonText: '¡Genial!'
                 });
                 form.reset(); 
@@ -460,7 +457,7 @@
                     title: 'Oops...',
                     text: 'Hubo un error al enviar el registro. Revisa tu conexión a internet e intenta de nuevo.',
                     icon: 'error',
-                    confirmButtonColor: '#e73c7e'
+                    confirmButtonColor: '#f04335' /* Rojo */
                 });
             }).finally(() => {
                 btnGuardar.innerHTML = textoOriginal;
