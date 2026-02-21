@@ -468,10 +468,12 @@
             }
 
             // Si falta algo, lanzamos la alerta de error y detenemos el envío
+            // Si falta algo, lanzamos la alerta de error y detenemos el envío
             if (!formularioValido) {
                 Swal.fire({
                     title: 'Faltan datos',
-                    text: `Por favor, completa correctamente el campo: ${campoFaltante}`,
+                    // Cambiamos "text" por "html" y le damos estilo de negrita suave al campo
+                    html: `Por favor, completa correctamente el campo: <span style="font-weight: 600; color: #2c3e50;">${campoFaltante}</span>`,
                     icon: 'warning',
                     confirmButtonColor: '#f04335' 
                 });
