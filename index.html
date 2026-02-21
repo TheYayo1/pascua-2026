@@ -19,7 +19,6 @@
         /* --- ESTILOS PERSONALIZADOS CON PALETA DEL FLYER --- */
         body {
             font-family: 'Poppins', sans-serif;
-            /* Nuevo fondo animado con los colores: Turquesa, Azul fuerte y Verde limón */
             background: linear-gradient(-45deg, #22b4b1, #2095da, #7abc44, #22b4b1);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
@@ -39,12 +38,12 @@
         }
 
         .glass-card {
-            background: rgba(255, 255, 255, 0.95); /* Un poco más blanco para que el texto resalte mejor */
+            background: rgba(255, 255, 255, 0.95); 
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 8px 32px 0 rgba(32, 149, 218, 0.3); /* Sombra azulada */
+            box-shadow: 0 8px 32px 0 rgba(32, 149, 218, 0.3); 
             padding: 3rem 2rem;
             max-width: 450px;
             width: 90%;
@@ -52,7 +51,7 @@
         }
 
         .title-pascua {
-            color: #2095da; /* Azul fuerte del flyer */
+            color: #2095da; 
             font-weight: 900;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -66,7 +65,7 @@
 
         .info-box {
             background: rgba(255, 255, 255, 0.8);
-            border-left: 5px solid #f04335; /* Borde rojo del flyer */
+            border-left: 5px solid #f04335; 
             border-radius: 10px;
             padding: 1.2rem;
             text-align: left;
@@ -79,7 +78,7 @@
         }
 
         .info-title {
-            color: #f04335; /* Rojo del flyer */
+            color: #f04335; 
             font-weight: 800;
             font-size: 1.1rem;
             margin-bottom: 8px;
@@ -89,14 +88,14 @@
         .form-label-custom {
             font-weight: 700;
             font-size: 0.9rem;
-            color: #2095da; /* Azul fuerte para las preguntas */
+            color: #2095da; 
             margin-bottom: 4px;
             display: block;
         }
 
         .form-control-custom {
             background: rgba(255, 255, 255, 0.7);
-            border: 1px solid rgba(34, 180, 177, 0.3); /* Borde turquesa claro */
+            border: 1px solid rgba(34, 180, 177, 0.3); 
             border-radius: 10px;
             padding: 10px 15px;
             margin-bottom: 15px;
@@ -117,16 +116,15 @@
             background: rgba(255, 255, 255, 1);
             outline: none;
             box-shadow: 0 0 10px rgba(34, 180, 177, 0.4);
-            border-color: #22b4b1; /* Turquesa al hacer focus */
+            border-color: #22b4b1; 
         }
 
         .asterisk {
-            color: #f04335; /* Rojo del flyer para los obligatorios */
+            color: #f04335; 
             font-weight: bold;
         }
 
         .btn-registro {
-            /* Botón con gradiente Verde Limón a Turquesa */
             background: linear-gradient(45deg, #7abc44, #22b4b1);
             border: none;
             color: white;
@@ -221,7 +219,7 @@
             object-fit: cover;
             border-radius: 20px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-            border: 3px solid white; /* Borde blanco para que parezcan fotos impresas */
+            border: 3px solid white; 
         }
     </style>
 </head>
@@ -229,16 +227,17 @@
 
     <div class="glass-card text-center" data-aos="zoom-in" data-aos-duration="1000">
         
-        <div class="mb-4 floating-icon">
+        <div class="mb-3 floating-icon">
             <img src="logo-san-juan-diegooo.jpg" 
                 alt="Logo Parroquia San Juan Diego" 
                 class="img-fluid rounded-circle shadow-lg" 
-                style="width: 150px; height: 150px; object-fit: cover; border: 4px solid #2095da;">
+                style="width: 100px; height: 100px; object-fit: cover; border: 4px solid white;">
         </div>
 
-        <h1 class="title-pascua mb-3">Pascua Juvenil 2026</h1>
-        
-        <p class="subtitle mb-1" style="color: #f04335;"> ¡Cristo Vive, con Él somos esperanza!
+        <h1 class="title-pascua mb-3">Pascua 2026</h1>
+
+        <p class="subtitle mb-1" style="color: #f04335;">
+            ¡Cristo Vive, con Él somos esperanza!
         </p>
         <p class="subtitle mb-4">
             Prepárate para vivir la mejor experiencia de tu vida.
@@ -246,7 +245,8 @@
 
         <div class="mb-4">
             <div class="d-flex justify-content-center align-items-center mb-1" data-aos="fade-up" data-aos-delay="200">
-                <i class="far fa-calendar-alt me-2" style="color: #22b4b1; font-size: 1.2rem;"></i> <span class="fw-bold" style="color: #2c3e50; font-size: 1.1rem;">Semana Santa 2026</span>
+                <i class="far fa-calendar-alt me-2" style="color: #22b4b1; font-size: 1.2rem;"></i>
+                <span class="fw-bold" style="color: #2c3e50; font-size: 1.1rem;">Semana Santa 2026</span>
             </div>
             <div class="mb-3" data-aos="fade-up" data-aos-delay="250">
                 <span style="font-weight: 700; color: #555; background: rgba(34, 180, 177, 0.1); padding: 5px 15px; border-radius: 20px; font-size: 0.95rem;">
@@ -255,7 +255,8 @@
             </div>
 
             <div class="d-flex justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="300">
-                <i class="fas fa-map-marker-alt me-2" style="color: #faa821; font-size: 1.2rem;"></i> <span style="max-width: 300px; line-height: 1.4; font-weight: 600; color: #555;">
+                <i class="fas fa-map-marker-alt me-2" style="color: #faa821; font-size: 1.2rem;"></i>
+                <span style="max-width: 300px; line-height: 1.4; font-weight: 600; color: #555;">
                     Parroquia San Juan Diego<br>
                     <small class="text-muted" style="font-weight: 500;">15 Av. Nte. Ote. 580, La Pimienta, 29034 Tuxtla Gutiérrez, Chiapas.</small>
                 </span>
@@ -272,18 +273,22 @@
             </p>
             
             <div class="mb-3" style="font-size: 0.9rem; color: #555; font-weight: 600;">
-                <i class="fas fa-apple-alt me-1" style="color: #7abc44;"></i> Te recomendamos traer un refrigerio ligero (lunch) para que nada te detenga. ¡Queremos que estés al 100%!
+                <i class="fas fa-apple-alt me-1" style="color: #7abc44;"></i>
+                Te recomendamos traer un refrigerio ligero (lunch) para que nada te detenga. ¡Queremos que estés al 100%!
             </div>
             
-            <div class="p-3 rounded" style="background: rgba(255,255,255,0.7); border: 2px dashed #faa821;"> <h6 class="fw-bold mb-2 text-center" style="color: #faa821; text-transform: uppercase; font-weight: 900;">Opciones de Paquetes</h6>
+            <div class="p-3 rounded" style="background: rgba(255,255,255,0.7); border: 2px dashed #faa821;">
+                <h6 class="fw-bold mb-2 text-center" style="color: #faa821; text-transform: uppercase; font-weight: 900;">Opciones de Paquetes</h6>
                 <div class="d-flex align-items-center mb-2">
-                    <i class="fas fa-ticket-alt fs-5 me-3" style="color: #22b4b1;"></i> <div class="text-start">
+                    <i class="fas fa-ticket-alt fs-5 me-3" style="color: #22b4b1;"></i>
+                    <div class="text-start">
                         <strong style="color: #333; font-size: 1rem; font-weight: 900;">Paquete 1 - $85</strong><br>
                         <span style="color: #555; font-size: 0.85rem; font-weight: 600;">Inscripción</span>
                     </div>
                 </div>
                 <div class="d-flex align-items-center">
-                    <i class="fas fa-tshirt fs-5 me-3" style="color: #f04335;"></i> <div class="text-start">
+                    <i class="fas fa-tshirt fs-5 me-3" style="color: #f04335;"></i>
+                    <div class="text-start">
                         <strong style="color: #333; font-size: 1rem; font-weight: 900;">Paquete 2 - $220</strong><br>
                         <span style="color: #555; font-size: 0.85rem; font-weight: 600;">Inscripción y playera</span>
                     </div>
@@ -291,45 +296,57 @@
             </div>
         </div>
 
-        <form id="registroPascuaForm" class="mt-4 text-start" data-aos="fade-up" data-aos-delay="500">
+        <form id="registroPascuaForm" class="mt-4 text-start" data-aos="fade-up" data-aos-delay="500" novalidate>
             <h5 class="fw-bold mb-4 text-center" style="color: #2095da; font-weight: 900;">¡Asegura tu lugar!</h5>
             
             <label class="form-label-custom">Nombre completo <span class="asterisk">*</span></label>
-            <input type="text" name="entry.621081863" class="form-control-custom" placeholder="Tu respuesta" required>
+            <input type="text" name="entry.621081863" class="form-control-custom" placeholder="Tu respuesta" required data-nombre="Nombre completo">
             
             <label class="form-label-custom">Edad <span class="asterisk">*</span></label>
-            <input type="number" name="entry.1490454749" class="form-control-custom" placeholder="Tu respuesta" required>
+            <input type="number" name="entry.1490454749" class="form-control-custom" placeholder="Tu respuesta" required data-nombre="Edad">
             
             <label class="form-label-custom">Teléfono (WhatsApp) <span class="asterisk">*</span> <small class="text-muted fw-normal" style="font-size: 0.75rem;">(10 dígitos)</small></label>
-            <input type="tel" name="entry.2007439274" class="form-control-custom" placeholder="Ej: 9611234567" required pattern="[0-9]{10}" maxlength="10" title="Debe contener exactamente 10 números" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+            <input type="tel" name="entry.2007439274" class="form-control-custom" placeholder="Ej: 9611234567" required pattern="[0-9]{10}" maxlength="10" title="Debe contener exactamente 10 números" oninput="this.value = this.value.replace(/[^0-9]/g, '')" data-nombre="Teléfono (WhatsApp)">
             
             <label class="form-label-custom">Parroquia o Capilla de origen</label>
             <input type="text" name="entry.523175738" class="form-control-custom" placeholder="Tu respuesta">
             
             <label class="form-label-custom">Nombre del contacto de emergencia (tutor) <span class="asterisk">*</span></label>
-            <input type="text" name="entry.517533376" class="form-control-custom" placeholder="Tu respuesta" required>
+            <input type="text" name="entry.517533376" class="form-control-custom" placeholder="Tu respuesta" required data-nombre="Nombre de contacto de emergencia">
             
             <label class="form-label-custom">Teléfono del contacto de emergencia <span class="asterisk">*</span> <small class="text-muted fw-normal" style="font-size: 0.75rem;">(10 dígitos)</small></label>
-            <input type="tel" name="entry.18630972" class="form-control-custom" placeholder="Ej: 9611234567" required pattern="[0-9]{10}" maxlength="10" title="Debe contener exactamente 10 números" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+            <input type="tel" name="entry.18630972" class="form-control-custom" placeholder="Ej: 9611234567" required pattern="[0-9]{10}" maxlength="10" title="Debe contener exactamente 10 números" oninput="this.value = this.value.replace(/[^0-9]/g, '')" data-nombre="Teléfono de emergencia">
             
             <label class="form-label-custom">¿Tienes alguna alergia o condición médica? (Opcional)</label>
             <textarea class="form-control-custom" name="entry.76012710" rows="2" placeholder="Tu respuesta"></textarea>
             
-            <label class="form-label-custom">¿Qué paquete vas a tomar? <span class="asterisk">*</span></label>
-            <select class="form-control-custom" name="entry.781424884" required style="cursor: pointer; appearance: auto;">
-                <option value="" disabled selected>Selecciona tu paquete...</option>
-                <option value="PAQUETE 1">PAQUETE 1</option>
-                <option value="PAQUETE 2">PAQUETE 2</option>
-            </select>
-            
-            <label class="form-label-custom">Talla <span class="asterisk">*</span></label>
-            <select class="form-control-custom" name="entry.83136480" required style="cursor: pointer; appearance: auto;">
-                <option value="" disabled selected>Selecciona tu talla...</option>
-                <option value="CHICA">CHICA</option>
-                <option value="MEDIANA">MEDIANA</option>
-                <option value="GRANDE">GRANDE</option>
-                <option value="EXTRA GRANDE">EXTRA GRANDE</option>
-            </select>
+            <div class="p-3 mb-4 rounded shadow-sm" style="background: rgba(255,255,255,0.85); border: 2px solid #22b4b1;">
+                <h6 class="fw-bold text-center mb-3" style="color: #22b4b1; font-weight: 800;">¡Lúcete con la playera oficial! 😍</h6>
+                
+                <div class="text-center mb-3">
+                    <img src="playera.jpg" alt="Playera Pascua 2026" class="img-fluid rounded shadow-sm" style="max-height: 200px; border: 3px solid white;">
+                </div>
+                
+                <label class="form-label-custom">¿Qué paquete vas a tomar? <span class="asterisk">*</span></label>
+                <select class="form-control-custom" name="entry.781424884" required style="cursor: pointer; appearance: auto;" data-nombre="Paquete">
+                    <option value="" disabled selected>Selecciona tu paquete...</option>
+                    <option value="PAQUETE 1">PAQUETE 1 (Solo inscripción)</option>
+                    <option value="PAQUETE 2">PAQUETE 2 (Inscripción + Playera)</option>
+                </select>
+                
+                <label class="form-label-custom">Talla <span class="asterisk">*</span></label>
+                <select class="form-control-custom mb-2" name="entry.83136480" required style="cursor: pointer; appearance: auto;" data-nombre="Talla">
+                    <option value="" disabled selected>Selecciona tu talla...</option>
+                    <option value="CHICA">CHICA</option>
+                    <option value="MEDIANA">MEDIANA</option>
+                    <option value="GRANDE">GRANDE</option>
+                    <option value="EXTRA GRANDE">EXTRA GRANDE</option>
+                </select>
+                
+                <p class="text-muted text-center m-0" style="font-size: 0.75rem; line-height: 1.2;">
+                    <em>*Por favor, selecciona tu talla sin importar el paquete que elijas. ¡Nos sirve de referencia por si te animas después! 😉</em>
+                </p>
+            </div>
             
             <button type="submit" id="btnGuardar" class="btn-registro mt-4" data-aos="pulse" data-aos-infinite="true">
                 GUARDAR REGISTRO
@@ -432,6 +449,36 @@
         form.addEventListener('submit', function(e) {
             e.preventDefault(); 
             
+            // --- VALIDACIÓN TIPO DATA ANNOTATION ---
+            // Revisamos todos los campos que tengan "required"
+            const camposRequeridos = form.querySelectorAll('[required]');
+            let formularioValido = true;
+            let campoFaltante = "";
+
+            // Buscamos el primero que esté vacío o inválido
+            for (let campo of camposRequeridos) {
+                if (!campo.value.trim() || !campo.checkValidity()) {
+                    formularioValido = false;
+                    // Obtenemos el nombre amigable que pusimos en data-nombre
+                    campoFaltante = campo.getAttribute('data-nombre'); 
+                    // Ponemos el foco en ese campo
+                    campo.focus();
+                    break; 
+                }
+            }
+
+            // Si falta algo, lanzamos la alerta de error y detenemos el envío
+            if (!formularioValido) {
+                Swal.fire({
+                    title: 'Faltan datos',
+                    text: `Por favor, completa correctamente el campo: ${campoFaltante}`,
+                    icon: 'warning',
+                    confirmButtonColor: '#f04335' 
+                });
+                return; // Corta la ejecución aquí
+            }
+            // --- FIN DE VALIDACIÓN ---
+
             const textoOriginal = btnGuardar.innerHTML;
             btnGuardar.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
             btnGuardar.disabled = true;
@@ -448,7 +495,7 @@
                     title: '¡Registro Exitoso! 🎉',
                     text: 'Prepárate con todo el ánimo porque vas a vivir una experiencia inolvidable. ¡Nos vemos en Pascua!',
                     icon: 'success',
-                    confirmButtonColor: '#22b4b1', /* Turquesa */
+                    confirmButtonColor: '#22b4b1', 
                     confirmButtonText: '¡Genial!'
                 });
                 form.reset(); 
@@ -457,7 +504,7 @@
                     title: 'Oops...',
                     text: 'Hubo un error al enviar el registro. Revisa tu conexión a internet e intenta de nuevo.',
                     icon: 'error',
-                    confirmButtonColor: '#f04335' /* Rojo */
+                    confirmButtonColor: '#f04335' 
                 });
             }).finally(() => {
                 btnGuardar.innerHTML = textoOriginal;
