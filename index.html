@@ -156,6 +156,50 @@
             100% { transform: translate(0, -0px); }
         }
 
+        /* --- NUEVOS ESTILOS PARA REDES SOCIALES --- */
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 90%;
+            padding: 12px 20px;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.5);
+            color: #555;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            /* cubic-bezier hace que el rebote se vea elástico y fluido */
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            border: 2px solid transparent;
+        }
+
+        .social-btn:hover, .social-btn:focus {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            background: white;
+            color: #333;
+        }
+
+        .social-btn:active {
+            transform: scale(0.92) translateY(2px); /* Efecto de hundimiento fuerte al dar click */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .ig-btn:hover i {
+            color: #E1306C;
+            transform: scale(1.2);
+            transition: transform 0.3s ease;
+        }
+
+        .tk-btn:hover i {
+            color: #000000;
+            transform: scale(1.2);
+            transition: transform 0.3s ease;
+        }
+
+        .social-btn i {
+            transition: transform 0.3s ease;
+        }
+
         /* Contenedor del Carrusel */
         #contenedor-carrusel {
             opacity: 0;
@@ -316,12 +360,18 @@
                 <i class="fab fa-whatsapp me-2 fs-5 align-middle"></i> Contactar por WhatsApp
             </a>
             
-            <div class="mt-4 pt-3 border-top border-secondary-subtle">
+            <div class="mt-4 pt-4 border-top border-secondary-subtle d-flex flex-column align-items-center gap-3">
                 <a href="https://www.instagram.com/daj.sjd?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
                 target="_blank" 
-                class="text-decoration-none fw-bold" 
-                style="color: #E1306C; font-size: 1.1rem;">
-                    <i class="fab fa-instagram"></i> Síguenos en @daj.sjd
+                class="social-btn ig-btn text-decoration-none fw-bold text-center">
+                    <i class="fab fa-instagram fs-4 me-2"></i> Síguenos en Instagram
+                </a>
+                
+                <a href="https://www.tiktok.com/@daj.sjd" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="social-btn tk-btn text-decoration-none fw-bold text-center">
+                    <i class="fab fa-tiktok fs-4 me-2"></i> Síguenos en TikTok
                 </a>
             </div>
         </div>
@@ -427,6 +477,24 @@
                 btnGuardar.innerHTML = textoOriginal;
                 btnGuardar.disabled = false;
             });
+        });
+    </script>
+    
+    <script>
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        window.addEventListener('beforeunload', function() {
+            window.scrollTo(0, 0);
+        });
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                window.scrollTo({
+                    top: 0,
+                    left: 0,
+                    behavior: 'instant'
+                });
+            }, 50); 
         });
     </script>
 </body>
