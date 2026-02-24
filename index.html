@@ -72,67 +72,73 @@
             z-index: 15; 
         }
 
-        /* --- EL ACUARIO Y LOS PECES --- */
+        /* --- EL ACUARIO Y LOS PECES (Hardware Accelerated) --- */
         .ocean-container {
             position: fixed;
-            top: 0; left: 0; 
-            width: 100%; height: 100%; 
+            top: 0; left: 0; right: 0; bottom: 0; /* Ajuste perfecto sin medidas dinámicas */
             z-index: 10; 
             pointer-events: none;
             overflow: hidden;
+            transform: translateZ(0); /* Fuerza el uso de la tarjeta gráfica */
         }
 
         .fish-track {
             position: absolute;
             width: 65px; height: 25px;
+            /* Evita que el celular recalcule la posición al hacer scroll */
+            will-change: top, left, transform; 
         }
 
         .fish-svg {
             width: 100%; height: 100%;
         }
 
-        /* --- RUTAS EXACTAS A TODOS LOS LADOS --- */
-        /* Horizontales */
+        /* --- RUTAS EXACTAS A TODOS LOS LADOS (Reemplazo de vh/vw por %) --- */
+        
+        /* 1. Horizontales: Izquierda a Derecha */
         .track-1 { top: 25%; animation: swimRight 22s linear infinite backwards; }
         .track-2 { top: 75%; animation: swimRight 28s linear infinite 5s backwards; width: 50px; height: 18px; }
         @keyframes swimRight {
-            0% { left: -150px; transform: rotate(0deg) translateY(0); }
+            0% { left: -20%; transform: rotate(0deg) translateY(0); }
             50% { transform: rotate(0deg) translateY(-25px); }
-            100% { left: 100vw; transform: rotate(0deg) translateY(0); }
+            100% { left: 120%; transform: rotate(0deg) translateY(0); }
         }
 
+        /* 2. Horizontales: Derecha a Izquierda */
         .track-3 { top: 35%; animation: swimLeft 24s linear infinite 2s backwards; width: 80px; height: 30px; }
         .track-4 { top: 85%; animation: swimLeft 30s linear infinite 10s backwards; width: 45px; height: 15px;}
         @keyframes swimLeft {
-            0% { left: 100vw; transform: rotate(180deg) translateY(0); }
+            0% { left: 120%; transform: rotate(180deg) translateY(0); }
             50% { transform: rotate(180deg) translateY(25px); }
-            100% { left: -150px; transform: rotate(180deg) translateY(0); }
+            100% { left: -20%; transform: rotate(180deg) translateY(0); }
         }
 
-        /* Diagonales Antiguas */
+        /* 3. Diagonal: Arriba-Izquierda a Abajo-Derecha */
         .track-5 { animation: swimDiagDownRight 32s linear infinite 3s backwards; width: 55px; height: 20px;}
         @keyframes swimDiagDownRight {
-            0% { top: -100px; left: -100px; transform: rotate(35deg); }
-            100% { top: 120vh; left: 120vw; transform: rotate(35deg); }
+            0% { top: -20%; left: -20%; transform: rotate(35deg); }
+            100% { top: 120%; left: 120%; transform: rotate(35deg); }
         }
 
-        .track-6 { animation: swimDiagUpLeft 26s linear infinite 8s backwards; width: 60px; height: 22px; }
-        @keyframes swimDiagUpLeft {
-            0% { top: 120vh; left: 120vw; transform: rotate(215deg); }
-            100% { top: -100px; left: -100px; transform: rotate(215deg); }
-        }
-
-        /* LAS DIAGONALES NUEVAS (Arriba-Derecha a Abajo-Izquierda y viceversa) */
-        .track-7 { animation: swimDiagDownLeft 34s linear infinite 1s backwards; width: 70px; height: 25px; }
+        /* 4. Diagonal: Arriba-Derecha a Abajo-Izquierda */
+        .track-6 { animation: swimDiagDownLeft 34s linear infinite 1s backwards; width: 70px; height: 25px; }
         @keyframes swimDiagDownLeft {
-            0% { top: -100px; left: 120vw; transform: rotate(145deg); }
-            100% { top: 120vh; left: -100px; transform: rotate(145deg); }
+            0% { top: -20%; left: 120%; transform: rotate(145deg); }
+            100% { top: 120%; left: -20%; transform: rotate(145deg); }
+        }
+        
+        /* 5. Diagonal: Abajo-Derecha a Arriba-Izquierda */
+        .track-7 { animation: swimDiagUpLeft 38s linear infinite 4s backwards; width: 65px; height: 23px; }
+        @keyframes swimDiagUpLeft {
+            0% { top: 120%; left: 120%; transform: rotate(215deg); }
+            100% { top: -20%; left: -20%; transform: rotate(215deg); }
         }
 
-        .track-8 { animation: swimDiagUpRight 38s linear infinite 6s backwards; width: 48px; height: 18px; }
+        /* 6. Diagonal: Abajo-Izquierda a Arriba-Derecha */
+        .track-8 { animation: swimDiagUpRight 30s linear infinite 6s backwards; width: 48px; height: 18px; }
         @keyframes swimDiagUpRight {
-            0% { top: 120vh; left: -100px; transform: rotate(-35deg); }
-            100% { top: -100px; left: 120vw; transform: rotate(-35deg); }
+            0% { top: 120%; left: -20%; transform: rotate(-35deg); }
+            100% { top: -20%; left: 120%; transform: rotate(-35deg); }
         }
 
         /* --- EFECTO AGUA AL TOCAR --- */
