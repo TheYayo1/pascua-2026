@@ -30,7 +30,7 @@
             background: linear-gradient(-45deg, #22b4b1, #2095da, #7abc44, #22b4b1,#6d05d4);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
-            min-height: 100dvh; 
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -72,79 +72,70 @@
             z-index: 15; 
         }
 
-        /* --- EL ACUARIO Y LOS PECES (Anti-saltos absoluto) --- */
+        /* --- EL ACUARIO Y LOS PECES (Hardware Accelerated) --- */
         .ocean-container {
             position: fixed;
-            /* Anclaje a los 4 bordes de la pantalla. Esto ignora la barra del navegador */
-            top: -100px; 
-            left: -100px; 
-            right: -100px; 
-            bottom: -100px; 
+            top: 0; left: 0; 
             z-index: 10; 
             pointer-events: none;
             overflow: hidden;
-            /* Aceleración por hardware forzada al máximo */
-            transform: translate3d(0, 0, 0); 
-            backface-visibility: hidden;
-            perspective: 1000px;
+            transform: translateZ(0); 
         }
 
         .fish-track {
             position: absolute;
             width: 65px; height: 25px;
-            will-change: transform, top, left; 
+            will-change: transform; 
         }
 
         .fish-svg {
             width: 100%; height: 100%;
         }
-        
-        /* --- RUTAS EXACTAS A TODOS LOS LADOS (100% Anti-Saltos usando Translate) --- */
+
+        /* --- RUTAS EXACTAS USANDO PÍXELES FIJOS (100% Anti-Saltos) --- */
         
         /* 1. Horizontales: Izquierda a Derecha */
-        .track-1 { top: 20%; left: 0; animation: swimRight 22s linear infinite backwards; }
-        .track-2 { top: 70%; left: 0; animation: swimRight 28s linear infinite 5s backwards; width: 50px; height: 18px; }
+        .track-1 { top: 25%; left: 0; animation: swimRight 45s linear infinite backwards; }
+        .track-2 { top: 75%; left: 0; animation: swimRight 55s linear infinite 5s backwards; width: 50px; height: 18px; }
         @keyframes swimRight {
-            0% { transform: translateX(-150px) rotate(0deg); }
-            50% { transform: translateX(50vw) translateY(-25px) rotate(0deg); }
-            100% { transform: translateX(120vw) rotate(0deg); }
+            0% { transform: translateX(-200px) rotate(0deg); }
+            100% { transform: translateX(1500px) rotate(0deg); }
         }
 
         /* 2. Horizontales: Derecha a Izquierda */
-        .track-3 { top: 35%; right: 0; animation: swimLeft 24s linear infinite 2s backwards; width: 80px; height: 30px; }
-        .track-4 { top: 85%; right: 0; animation: swimLeft 30s linear infinite 10s backwards; width: 45px; height: 15px;}
+        .track-3 { top: 35%; right: 0; animation: swimLeft 48s linear infinite 2s backwards; width: 80px; height: 30px; }
+        .track-4 { top: 85%; right: 0; animation: swimLeft 60s linear infinite 10s backwards; width: 45px; height: 15px;}
         @keyframes swimLeft {
-            0% { transform: translateX(150px) rotate(180deg); }
-            50% { transform: translateX(-50vw) translateY(25px) rotate(180deg); }
-            100% { transform: translateX(-120vw) rotate(180deg); }
+            0% { transform: translateX(200px) rotate(180deg); }
+            100% { transform: translateX(-1500px) rotate(180deg); }
         }
 
         /* 3. Diagonal: Arriba-Izquierda a Abajo-Derecha */
-        .track-5 { top: 0; left: 0; animation: swimDiagDownRight 32s linear infinite 3s backwards; width: 55px; height: 20px;}
+        .track-5 { top: 0; left: 0; animation: swimDiagDownRight 65s linear infinite 3s backwards; width: 55px; height: 20px;}
         @keyframes swimDiagDownRight {
-            0% { transform: translate(-100px, -100px) rotate(35deg); }
-            100% { transform: translate(120vw, 120vh) rotate(35deg); }
+            0% { transform: translate(-200px, -200px) rotate(35deg); }
+            100% { transform: translate(1500px, 2000px) rotate(35deg); }
         }
 
         /* 4. Diagonal: Arriba-Derecha a Abajo-Izquierda */
-        .track-6 { top: 0; right: 0; animation: swimDiagDownLeft 34s linear infinite 1s backwards; width: 70px; height: 25px; }
+        .track-6 { top: 0; right: 0; animation: swimDiagDownLeft 68s linear infinite 1s backwards; width: 70px; height: 25px; }
         @keyframes swimDiagDownLeft {
-            0% { transform: translate(100px, -100px) rotate(145deg); }
-            100% { transform: translate(-120vw, 120vh) rotate(145deg); }
+            0% { transform: translate(200px, -200px) rotate(145deg); }
+            100% { transform: translate(-1500px, 2000px) rotate(145deg); }
         }
         
         /* 5. Diagonal: Abajo-Derecha a Arriba-Izquierda */
-        .track-7 { bottom: 0; right: 0; animation: swimDiagUpLeft 38s linear infinite 4s backwards; width: 65px; height: 23px; }
+        .track-7 { bottom: 0; right: 0; animation: swimDiagUpLeft 75s linear infinite 4s backwards; width: 65px; height: 23px; }
         @keyframes swimDiagUpLeft {
-            0% { transform: translate(100px, 100px) rotate(215deg); }
-            100% { transform: translate(-120vw, -120vh) rotate(215deg); }
+            0% { transform: translate(200px, 200px) rotate(215deg); }
+            100% { transform: translate(-1500px, -2000px) rotate(215deg); }
         }
 
         /* 6. Diagonal: Abajo-Izquierda a Arriba-Derecha */
-        .track-8 { bottom: 0; left: 0; animation: swimDiagUpRight 30s linear infinite 6s backwards; width: 48px; height: 18px; }
+        .track-8 { bottom: 0; left: 0; animation: swimDiagUpRight 60s linear infinite 6s backwards; width: 48px; height: 18px; }
         @keyframes swimDiagUpRight {
-            0% { transform: translate(-100px, 100px) rotate(-35deg); }
-            100% { transform: translate(120vw, -120vh) rotate(-35deg); }
+            0% { transform: translate(-200px, 200px) rotate(-35deg); }
+            100% { transform: translate(1500px, -2000px) rotate(-35deg); }
         }
 
         /* --- EFECTO AGUA AL TOCAR --- */
@@ -222,17 +213,25 @@
     </div>
 
     <div class="card-container">
+        
         <div class="glass-card-bg" data-aos="zoom-in" data-aos-duration="1000"></div>
 
         <div class="glass-card-content" data-aos="zoom-in" data-aos-duration="1000">
             <div class="mb-4 floating-icon" style="margin-top: -30px;">
-                <img src="logo-san-juan-diegooo.jpg" alt="Logo Parroquia San Juan Diego" class="img-fluid rounded-circle shadow-lg" style="width: 135px; height: 135px; object-fit: cover; border: 4px solid #6d05d4;">
+                <img src="logo-san-juan-diegooo.jpg" 
+                    alt="Logo Parroquia San Juan Diego" 
+                    class="img-fluid rounded-circle shadow-lg" 
+                    style="width: 135px; height: 135px; object-fit: cover; border: 4px solid #6d05d4;">
             </div>
 
             <h1 class="title-pascua mb-3">Pascua 2026</h1>
 
-            <p class="subtitle mb-1" style="color: #f04335;">¡Cristo Vive, con Él somos esperanza!</p>
-            <p class="subtitle mb-4">Prepárate para vivir la mejor experiencia de tu vida.</p>
+            <p class="subtitle mb-1" style="color: #f04335;">
+                ¡Cristo Vive, con Él somos esperanza!
+            </p>
+            <p class="subtitle mb-4">
+                Prepárate para vivir la mejor experiencia de tu vida.
+            </p>
 
             <div class="mb-4">
                 <div class="d-flex justify-content-center align-items-center mb-1" data-aos="fade-up" data-aos-delay="200">
@@ -349,7 +348,7 @@
                     
                     <div class="text-center mb-3 p-2 rounded" style="background: #f8f9fa; border: 1px dashed #2095da;">
                         <span style="font-size: 0.85rem; color: #2095da; font-weight: 700;">CLABE / Tarjeta:</span><br>
-                        <strong style="font-size: 1.3rem; color: #2095da; letter-spacing: 1px; user-select: all;">722969014011642901</strong>
+                        <strong style="font-size: 1.3rem; color: #2095da; letter-spacing: 1px; user-select: all;">0000 0000 0000 0000</strong>
                     </div>
                     
                     <div class="p-2 mb-3 rounded" style="background: rgba(34, 180, 177, 0.1); border-left: 4px solid #22b4b1; text-align: left;">
@@ -465,6 +464,29 @@
                 el.style.transform = `scale(${escala})`;
                 el.style.opacity = visibilidad * 1.5;
             });
+        });
+
+        // --- SOLUCIÓN DEFINITIVA ANTI-SALTOS ---
+        const ocean = document.getElementById('ocean');
+        
+        // Guardamos el tamaño inicial real
+        let startWidth = window.innerWidth;
+        let startHeight = window.innerHeight;
+        
+        function freezeOcean() {
+            ocean.style.width = startWidth + 'px';
+            ocean.style.height = startHeight + 'px';
+        }
+        
+        freezeOcean();
+
+        // Solo actualizamos el tamaño si el celular se gira horizontalmente
+        window.addEventListener('resize', () => {
+            if (Math.abs(window.innerWidth - startWidth) > 50) {
+                startWidth = window.innerWidth;
+                startHeight = window.innerHeight;
+                freezeOcean();
+            }
         });
 
         // --- LÓGICA DE INTERACCIÓN (Solo Agua) ---
