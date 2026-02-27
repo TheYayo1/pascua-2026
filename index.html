@@ -92,50 +92,52 @@
             width: 100%; height: 100%;
         }
         
+        /* --- RUTAS EXACTAS A TODOS LOS LADOS (100% Anti-Saltos usando Translate) --- */
+        
         /* 1. Horizontales: Izquierda a Derecha */
-        .track-1 { top: 25%; animation: swimRight 22s linear infinite backwards; }
-        .track-2 { top: 75%; animation: swimRight 28s linear infinite 5s backwards; width: 50px; height: 18px; }
+        .track-1 { top: 20%; left: 0; animation: swimRight 22s linear infinite backwards; }
+        .track-2 { top: 70%; left: 0; animation: swimRight 28s linear infinite 5s backwards; width: 50px; height: 18px; }
         @keyframes swimRight {
-            0% { left: -20%; transform: rotate(0deg) translateY(0); }
-            50% { transform: rotate(0deg) translateY(-25px); }
-            100% { left: 120%; transform: rotate(0deg) translateY(0); }
+            0% { transform: translateX(-150px) rotate(0deg); }
+            50% { transform: translateX(50vw) translateY(-25px) rotate(0deg); }
+            100% { transform: translateX(120vw) rotate(0deg); }
         }
 
         /* 2. Horizontales: Derecha a Izquierda */
-        .track-3 { top: 35%; animation: swimLeft 24s linear infinite 2s backwards; width: 80px; height: 30px; }
-        .track-4 { top: 85%; animation: swimLeft 30s linear infinite 10s backwards; width: 45px; height: 15px;}
+        .track-3 { top: 35%; right: 0; animation: swimLeft 24s linear infinite 2s backwards; width: 80px; height: 30px; }
+        .track-4 { top: 85%; right: 0; animation: swimLeft 30s linear infinite 10s backwards; width: 45px; height: 15px;}
         @keyframes swimLeft {
-            0% { left: 120%; transform: rotate(180deg) translateY(0); }
-            50% { transform: rotate(180deg) translateY(25px); }
-            100% { left: -20%; transform: rotate(180deg) translateY(0); }
+            0% { transform: translateX(150px) rotate(180deg); }
+            50% { transform: translateX(-50vw) translateY(25px) rotate(180deg); }
+            100% { transform: translateX(-120vw) rotate(180deg); }
         }
 
         /* 3. Diagonal: Arriba-Izquierda a Abajo-Derecha */
-        .track-5 { animation: swimDiagDownRight 32s linear infinite 3s backwards; width: 55px; height: 20px;}
+        .track-5 { top: 0; left: 0; animation: swimDiagDownRight 32s linear infinite 3s backwards; width: 55px; height: 20px;}
         @keyframes swimDiagDownRight {
-            0% { top: -20%; left: -20%; transform: rotate(35deg); }
-            100% { top: 120%; left: 120%; transform: rotate(35deg); }
+            0% { transform: translate(-100px, -100px) rotate(35deg); }
+            100% { transform: translate(120vw, 120vh) rotate(35deg); }
         }
 
         /* 4. Diagonal: Arriba-Derecha a Abajo-Izquierda */
-        .track-6 { animation: swimDiagDownLeft 34s linear infinite 1s backwards; width: 70px; height: 25px; }
+        .track-6 { top: 0; right: 0; animation: swimDiagDownLeft 34s linear infinite 1s backwards; width: 70px; height: 25px; }
         @keyframes swimDiagDownLeft {
-            0% { top: -20%; left: 120%; transform: rotate(145deg); }
-            100% { top: 120%; left: -20%; transform: rotate(145deg); }
+            0% { transform: translate(100px, -100px) rotate(145deg); }
+            100% { transform: translate(-120vw, 120vh) rotate(145deg); }
         }
         
         /* 5. Diagonal: Abajo-Derecha a Arriba-Izquierda */
-        .track-7 { animation: swimDiagUpLeft 38s linear infinite 4s backwards; width: 65px; height: 23px; }
+        .track-7 { bottom: 0; right: 0; animation: swimDiagUpLeft 38s linear infinite 4s backwards; width: 65px; height: 23px; }
         @keyframes swimDiagUpLeft {
-            0% { top: 120%; left: 120%; transform: rotate(215deg); }
-            100% { top: -20%; left: -20%; transform: rotate(215deg); }
+            0% { transform: translate(100px, 100px) rotate(215deg); }
+            100% { transform: translate(-120vw, -120vh) rotate(215deg); }
         }
 
         /* 6. Diagonal: Abajo-Izquierda a Arriba-Derecha */
-        .track-8 { animation: swimDiagUpRight 30s linear infinite 6s backwards; width: 48px; height: 18px; }
+        .track-8 { bottom: 0; left: 0; animation: swimDiagUpRight 30s linear infinite 6s backwards; width: 48px; height: 18px; }
         @keyframes swimDiagUpRight {
-            0% { top: 120%; left: -20%; transform: rotate(-35deg); }
-            100% { top: -20%; left: 120%; transform: rotate(-35deg); }
+            0% { transform: translate(-100px, 100px) rotate(-35deg); }
+            100% { transform: translate(120vw, -120vh) rotate(-35deg); }
         }
 
         /* --- EFECTO AGUA AL TOCAR --- */
