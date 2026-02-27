@@ -357,8 +357,17 @@
                         </ul>
                     </div>
                     
+                    <div class="p-2 mb-3 rounded" style="background: rgba(240, 67, 53, 0.1); border-left: 4px solid #f04335; text-align: center;">
+                        <span style="font-size: 0.85rem; color: #000; font-weight: 600;">
+                            ¿Se te complica la transferencia? 🤔
+                        </span><br>
+                        <span style="font-size: 0.85rem; color: #333;">
+                            ¡No te preocupes! También puedes pagar <strong style="color: #f04335;">en efectivo el mismo día</strong> de la Pascua.
+                        </span>
+                    </div>
+                    
                     <p class="text-center m-0 fw-bold" style="font-size: 0.85rem; color: #f04335; line-height: 1.3;">
-                        ⚠️ IMPORTANTE: Al terminar tu registro, envíanos tu comprobante al WhatsApp de contacto para confirmar tu inscripción.
+                        ⚠️ IMPORTANTE: Si pagaste por transferencia, envíanos tu comprobante al WhatsApp de contacto para confirmar tu inscripción.
                     </p>
                 </div>
                 <button type="submit" id="btnGuardar" class="btn-registro mt-4" data-aos="pulse" data-aos-infinite="true">
@@ -449,26 +458,6 @@
             });
         });
 
-        // --- SOLUCIÓN DEFINITIVA ANTI-SALTOS ---
-        const ocean = document.getElementById('ocean');
-        let oceanW = window.innerWidth;
-        let oceanH = window.innerHeight;
-        
-        function fixOceanSize() {
-            ocean.style.width = oceanW + 'px';
-            ocean.style.height = oceanH + 'px';
-        }
-        
-        fixOceanSize();
-
-        window.addEventListener('resize', () => {
-            if (window.innerWidth !== oceanW) {
-                oceanW = window.innerWidth;
-                oceanH = window.innerHeight;
-                fixOceanSize();
-            }
-        });
-
         // --- LÓGICA DE INTERACCIÓN (Solo Agua) ---
         function createRipple(x, y) {
             const ripple = document.createElement('div');
@@ -533,7 +522,7 @@
             }).then(() => {
                 Swal.fire({
                     title: '¡Registro Exitoso! 🎉',
-                    html: 'Tus datos se han guardado.<br><br><strong style="color:#f04335;">¡No olvides enviar tu comprobante de pago al WhatsApp de Fátima!</strong><br><br>¡Nos vemos en Pascua!',
+                    html: 'Tus datos se han guardado.<br><br><strong style="color:#f04335;">¡Recuerda asegurar tu lugar realizando tu pago o avisándonos!</strong><br><br>¡Nos vemos en Pascua!',
                     icon: 'success',
                     confirmButtonColor: '#22b4b1', 
                     confirmButtonText: '¡Entendido!'
