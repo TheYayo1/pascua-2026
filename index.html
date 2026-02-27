@@ -72,18 +72,21 @@
             z-index: 15; 
         }
 
+        /* --- EL ACUARIO Y LOS PECES (Anti-saltos absoluto) --- */
         .ocean-container {
             position: fixed;
-            top: 0; 
-            left: 0; 
-            width: 100vw; 
-            height: 100dvh; 
+            /* Anclaje a los 4 bordes de la pantalla. Esto ignora la barra del navegador */
+            top: -100px; 
+            left: -100px; 
+            right: -100px; 
+            bottom: -100px; 
             z-index: 10; 
             pointer-events: none;
             overflow: hidden;
-            touch-action: none; 
+            /* Aceleración por hardware forzada al máximo */
             transform: translate3d(0, 0, 0); 
-            backface-visibility: hidden; 
+            backface-visibility: hidden;
+            perspective: 1000px;
         }
 
         .fish-track {
