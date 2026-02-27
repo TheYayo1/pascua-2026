@@ -346,9 +346,14 @@
                         Para asegurar tu lugar, realiza tu pago por transferencia a nuestra cuenta de <strong>Mercado Pago</strong>:
                     </p>
                     
-                    <div class="text-center mb-3 p-2 rounded" style="background: #f8f9fa; border: 1px dashed #2095da;">
+                    <div class="text-center mb-3 p-3 rounded position-relative" style="background: #f8f9fa; border: 1px dashed #2095da;">
+                        <button type="button" onclick="copiarClabe()" class="btn btn-sm shadow-sm" style="position: absolute; top: 8px; right: 8px; background-color: #22b4b1; color: white; border-radius: 6px; padding: 4px 8px; font-size: 0.85rem;" title="Copiar número">
+                            <i id="iconoCopiar" class="far fa-copy"></i>
+                        </button>
+
                         <span style="font-size: 0.85rem; color: #2095da; font-weight: 700;">CLABE / Tarjeta:</span><br>
-                        <strong style="font-size: 1.3rem; color: #2095da; letter-spacing: 1px; user-select: all;">722969014011642901</strong>
+                        
+                        <strong id="numeroClabe" style="font-size: 1.25rem; color: #2095da; letter-spacing: 1px; user-select: all; display: block; margin-top: 4px;">722969014011642901</strong>
                     </div>
                     
                     <div class="p-2 mb-3 rounded" style="background: rgba(34, 180, 177, 0.1); border-left: 4px solid #22b4b1; text-align: left;">
@@ -587,6 +592,35 @@
                 });
             }, 50); 
         });
+        // --- FUNCIÓN PARA COPIAR EL NÚMERO ---
+        function copiarClabe() {
+            // Lee el número del HTML y le quita espacios por si acaso
+            const numero = document.getElementById('numeroClabe').innerText.replace(/\s+/g, '');
+            
+            navigator.clipboard.writeText(numero).then(() => {
+                // Cambia el ícono a una palomita
+                const icono = document.getElementById('iconoCopiar');
+                icono.className = 'fas fa-check';
+                
+                // Lanza una alerta miniatura (Toast) súper elegante con SweetAlert2
+                Swal.fire({
+                    toast: true,
+                    position: 'top',
+                    icon: 'success',
+                    title: '¡Número copiado!',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    timerProgressBar: true
+                });
+
+                // Regresa el ícono de copiar después de 2 segundos
+                setTimeout(() => {
+                    icono.className = 'far fa-copy';
+                }, 2000);
+            }).catch(err => {
+                console.error('Error al copiar: ', err);
+            });
+        }
     </script>
 </body>
 </html>
