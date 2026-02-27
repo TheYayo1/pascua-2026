@@ -53,7 +53,6 @@
             margin: 0 auto 50px auto;
         }
 
-        /* Capa 1: Fondo Blanco Opaco (Atrás de los peces) */
         .glass-card-bg {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -66,7 +65,6 @@
             z-index: 5;
         }
 
-        /* Capa 3: Textos y Formulario (Por encima de los peces) */
         .glass-card-content {
             position: relative;
             padding: 3rem 2rem;
@@ -74,34 +72,29 @@
             z-index: 15; 
         }
 
-        /* --- EL ACUARIO Y LOS PECES (Anti-saltos) --- */
+        /* --- EL ACUARIO Y LOS PECES (Hardware Accelerated) --- */
         .ocean-container {
             position: fixed;
-            top: 0; left: 0; 
-            /* Las medidas ahora se controlan con Javascript para evitar el salto */
-            width: 100%; height: 100%; 
+            top: 0; left: 0; right: 0; bottom: 0; 
             z-index: 10; 
             pointer-events: none;
             overflow: hidden;
-            /* Fuerza al celular a usar hardware gráfico para mayor fluidez */
-            transform: translateZ(0);
+            transform: translateZ(0); 
         }
 
         .fish-track {
             position: absolute;
             width: 65px; height: 25px;
-            will-change: transform, top, left; /* Optimización anti-lag */
+            will-change: transform, top, left; 
         }
 
         .fish-svg {
             width: 100%; height: 100%;
         }
-
-        /* --- RUTAS EXACTAS A TODOS LOS LADOS (Usando % en lugar de vh/vw) --- */
         
         /* 1. Horizontales: Izquierda a Derecha */
-        .track-1 { top: 20%; animation: swimRight 22s linear infinite backwards; }
-        .track-2 { top: 70%; animation: swimRight 28s linear infinite 5s backwards; width: 50px; height: 18px; }
+        .track-1 { top: 25%; animation: swimRight 22s linear infinite backwards; }
+        .track-2 { top: 75%; animation: swimRight 28s linear infinite 5s backwards; width: 50px; height: 18px; }
         @keyframes swimRight {
             0% { left: -20%; transform: rotate(0deg) translateY(0); }
             50% { transform: rotate(0deg) translateY(-25px); }
@@ -209,52 +202,28 @@
 <body>
 
     <div class="ocean-container" id="ocean">
-        <div class="fish-track track-1">
-            <svg class="fish-svg" viewBox="0 0 100 40"><path fill="#51b5c9" d="M85,20 C65,5 30,5 15,20 C30,35 65,35 85,20 Z"/><path fill="#51b5c9" d="M18,20 L0,10 L5,20 L0,30 Z"/></svg>
-        </div>
-        <div class="fish-track track-2">
-            <svg class="fish-svg" viewBox="0 0 100 40"><path fill="#3da1b5" d="M85,20 C65,5 30,5 15,20 C30,35 65,35 85,20 Z"/><path fill="#3da1b5" d="M18,20 L0,10 L5,20 L0,30 Z"/></svg>
-        </div>
-        <div class="fish-track track-3">
-            <svg class="fish-svg" viewBox="0 0 100 40"><path fill="#51b5c9" d="M85,20 C65,5 30,5 15,20 C30,35 65,35 85,20 Z"/><path fill="#51b5c9" d="M18,20 L0,10 L5,20 L0,30 Z"/></svg>
-        </div>
-        <div class="fish-track track-4">
-            <svg class="fish-svg" viewBox="0 0 100 40"><path fill="#66c9db" d="M85,20 C65,5 30,5 15,20 C30,35 65,35 85,20 Z"/><path fill="#66c9db" d="M18,20 L0,10 L5,20 L0,30 Z"/></svg>
-        </div>
-        <div class="fish-track track-5">
-            <svg class="fish-svg" viewBox="0 0 100 40"><path fill="#3da1b5" d="M85,20 C65,5 30,5 15,20 C30,35 65,35 85,20 Z"/><path fill="#3da1b5" d="M18,20 L0,10 L5,20 L0,30 Z"/></svg>
-        </div>
-        <div class="fish-track track-6">
-            <svg class="fish-svg" viewBox="0 0 100 40"><path fill="#51b5c9" d="M85,20 C65,5 30,5 15,20 C30,35 65,35 85,20 Z"/><path fill="#51b5c9" d="M18,20 L0,10 L5,20 L0,30 Z"/></svg>
-        </div>
-        <div class="fish-track track-7">
-            <svg class="fish-svg" viewBox="0 0 100 40"><path fill="#66c9db" d="M85,20 C65,5 30,5 15,20 C30,35 65,35 85,20 Z"/><path fill="#66c9db" d="M18,20 L0,10 L5,20 L0,30 Z"/></svg>
-        </div>
-        <div class="fish-track track-8">
-            <svg class="fish-svg" viewBox="0 0 100 40"><path fill="#3da1b5" d="M85,20 C65,5 30,5 15,20 C30,35 65,35 85,20 Z"/><path fill="#3da1b5" d="M18,20 L0,10 L5,20 L0,30 Z"/></svg>
-        </div>
+        <div class="fish-track track-1"><svg class="fish-svg" viewBox="0 0 100 40"><path fill="#51b5c9" d="M85,20 C65,5 30,5 15,20 C30,35 65,35 85,20 Z"/><path fill="#51b5c9" d="M18,20 L0,10 L5,20 L0,30 Z"/></svg></div>
+        <div class="fish-track track-2"><svg class="fish-svg" viewBox="0 0 100 40"><path fill="#3da1b5" d="M85,20 C65,5 30,5 15,20 C30,35 65,35 85,20 Z"/><path fill="#3da1b5" d="M18,20 L0,10 L5,20 L0,30 Z"/></svg></div>
+        <div class="fish-track track-3"><svg class="fish-svg" viewBox="0 0 100 40"><path fill="#51b5c9" d="M85,20 C65,5 30,5 15,20 C30,35 65,35 85,20 Z"/><path fill="#51b5c9" d="M18,20 L0,10 L5,20 L0,30 Z"/></svg></div>
+        <div class="fish-track track-4"><svg class="fish-svg" viewBox="0 0 100 40"><path fill="#66c9db" d="M85,20 C65,5 30,5 15,20 C30,35 65,35 85,20 Z"/><path fill="#66c9db" d="M18,20 L0,10 L5,20 L0,30 Z"/></svg></div>
+        <div class="fish-track track-5"><svg class="fish-svg" viewBox="0 0 100 40"><path fill="#3da1b5" d="M85,20 C65,5 30,5 15,20 C30,35 65,35 85,20 Z"/><path fill="#3da1b5" d="M18,20 L0,10 L5,20 L0,30 Z"/></svg></div>
+        <div class="fish-track track-6"><svg class="fish-svg" viewBox="0 0 100 40"><path fill="#51b5c9" d="M85,20 C65,5 30,5 15,20 C30,35 65,35 85,20 Z"/><path fill="#51b5c9" d="M18,20 L0,10 L5,20 L0,30 Z"/></svg></div>
+        <div class="fish-track track-7"><svg class="fish-svg" viewBox="0 0 100 40"><path fill="#66c9db" d="M85,20 C65,5 30,5 15,20 C30,35 65,35 85,20 Z"/><path fill="#66c9db" d="M18,20 L0,10 L5,20 L0,30 Z"/></svg></div>
+        <div class="fish-track track-8"><svg class="fish-svg" viewBox="0 0 100 40"><path fill="#3da1b5" d="M85,20 C65,5 30,5 15,20 C30,35 65,35 85,20 Z"/><path fill="#3da1b5" d="M18,20 L0,10 L5,20 L0,30 Z"/></svg></div>
     </div>
 
     <div class="card-container">
-        
         <div class="glass-card-bg" data-aos="zoom-in" data-aos-duration="1000"></div>
 
         <div class="glass-card-content" data-aos="zoom-in" data-aos-duration="1000">
             <div class="mb-4 floating-icon" style="margin-top: -30px;">
-                <img src="logo-san-juan-diegooo.jpg" 
-                    alt="Logo Parroquia San Juan Diego" 
-                    class="img-fluid rounded-circle shadow-lg" 
-                    style="width: 135px; height: 135px; object-fit: cover; border: 4px solid #6d05d4;">
+                <img src="logo-san-juan-diegooo.jpg" alt="Logo Parroquia San Juan Diego" class="img-fluid rounded-circle shadow-lg" style="width: 135px; height: 135px; object-fit: cover; border: 4px solid #6d05d4;">
             </div>
 
             <h1 class="title-pascua mb-3">Pascua 2026</h1>
 
-            <p class="subtitle mb-1" style="color: #f04335;">
-                ¡Cristo Vive, con Él somos esperanza!
-            </p>
-            <p class="subtitle mb-4">
-                Prepárate para vivir la mejor experiencia de tu vida.
-            </p>
+            <p class="subtitle mb-1" style="color: #f04335;">¡Cristo Vive, con Él somos esperanza!</p>
+            <p class="subtitle mb-4">Prepárate para vivir la mejor experiencia de tu vida.</p>
 
             <div class="mb-4">
                 <div class="d-flex justify-content-center align-items-center mb-1" data-aos="fade-up" data-aos-delay="200">
@@ -360,7 +329,38 @@
                         <em>*Por favor, selecciona tu talla sin importar el paquete que elijas. ¡Nos sirve de referencia por si te animas después! 😉</em>
                     </p>
                 </div>
-                
+
+                <div class="p-3 mb-4 rounded shadow-sm" style="background: rgba(255,255,255,0.85); border: 2px solid #faa821;">
+                    <h6 class="fw-bold text-center mb-3" style="color: #faa821; font-weight: 800;">
+                        <i class="fas fa-money-bill-wave me-1" style="color: #7abc44;"></i> Información de Pago
+                    </h6>
+                    <p class="text-center mb-3" style="font-size: 0.9rem; color: #000; line-height: 1.3;">
+                        Para asegurar tu lugar, realiza tu pago por transferencia a nuestra cuenta de <strong>Mercado Pago</strong>:
+                    </p>
+                    
+                    <div class="text-center mb-3 p-2 rounded" style="background: #f8f9fa; border: 1px dashed #2095da;">
+                        <span style="font-size: 0.85rem; color: #2095da; font-weight: 700;">CLABE / Tarjeta:</span><br>
+                        <strong style="font-size: 1.3rem; color: #2095da; letter-spacing: 1px; user-select: all;">722969014011642901</strong>
+                    </div>
+                    
+                    <div class="p-2 mb-3 rounded" style="background: rgba(34, 180, 177, 0.1); border-left: 4px solid #22b4b1; text-align: left;">
+                        <strong style="font-size: 0.9rem; color: #22b4b1; display: block; margin-bottom: 5px;">¿Qué poner en "Concepto" de pago?</strong>
+                        <ul style="font-size: 0.85rem; color: #000; margin: 0; padding-left: 1.2rem; line-height: 1.4;">
+                            <li class="mb-1"><span style="color: #22b4b1; font-weight: 600;">Paquete 1:</span> 
+                                <span style="color: #f04335; font-weight: 700;">Pack1 + Nombre y Apellido</span><br>
+                                <span style="font-style: italic; color: #555;">(Ej: Pack 1 Luis Ramos)</span>
+                            </li>
+                            <li class="mt-2"><span style="color: #22b4b1; font-weight: 600;">Paquete 2:</span> 
+                                <span style="color: #f04335; font-weight: 700;">Pack2 + Nombre y Apellido</span><br>
+                                <span style="font-style: italic; color: #555;">(Ej: Pack 2 Maria Gomez)</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <p class="text-center m-0 fw-bold" style="font-size: 0.85rem; color: #f04335; line-height: 1.3;">
+                        ⚠️ IMPORTANTE: Al terminar tu registro, envíanos tu comprobante al WhatsApp de contacto para confirmar tu inscripción.
+                    </p>
+                </div>
                 <button type="submit" id="btnGuardar" class="btn-registro mt-4" data-aos="pulse" data-aos-infinite="true">
                     GUARDAR REGISTRO
                 </button>
@@ -396,7 +396,6 @@
     </div> 
     
     <div class="wrapper-scroll-ref" id="wrapper-scroll-ref">
-        
         <div style="position: relative; width: 90%; margin: 0 auto 1rem auto;">
             <div class="animacion-scroll" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.95); backdrop-filter: blur(5px); border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); z-index: 5;"></div>
             
@@ -450,7 +449,7 @@
             });
         });
 
-        // --- SOLUCIÓN DEFINITIVA ANTI-SALTOS (Congela la caja del acuario) ---
+        // --- SOLUCIÓN DEFINITIVA ANTI-SALTOS ---
         const ocean = document.getElementById('ocean');
         let oceanW = window.innerWidth;
         let oceanH = window.innerHeight;
@@ -462,7 +461,6 @@
         
         fixOceanSize();
 
-        // Si giras el celular (cambia el ancho real), actualizamos el tanque
         window.addEventListener('resize', () => {
             if (window.innerWidth !== oceanW) {
                 oceanW = window.innerWidth;
@@ -535,10 +533,10 @@
             }).then(() => {
                 Swal.fire({
                     title: '¡Registro Exitoso! 🎉',
-                    text: 'Prepárate con todo el ánimo porque vas a vivir una experiencia inolvidable. ¡Nos vemos en Pascua!',
+                    html: 'Tus datos se han guardado.<br><br><strong style="color:#f04335;">¡No olvides enviar tu comprobante de pago al WhatsApp de Fátima!</strong><br><br>¡Nos vemos en Pascua!',
                     icon: 'success',
                     confirmButtonColor: '#22b4b1', 
-                    confirmButtonText: '¡Genial!'
+                    confirmButtonText: '¡Entendido!'
                 });
                 form.reset(); 
             }).catch((error) => {
