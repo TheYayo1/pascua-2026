@@ -173,8 +173,48 @@
         .btn-registro:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(34, 180, 177, 0.6); color: white; }
         .floating-icon { animation: floating 3s ease-in-out infinite; }
         @keyframes floating { 0% { transform: translate(0,  0px); } 50% { transform: translate(0, 15px); } 100% { transform: translate(0, -0px); } }
-        .social-btn { display: flex; align-items: center; justify-content: center; width: auto; min-width: 240px; padding: 10px 20px; border-radius: 50px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); transition: transform 0.2s ease; border: none; font-size: 1rem; color: white !important; }
+        /* --- BOTONES SOCIALES UNIFICADOS Y AESTHETIC --- */
+        .social-btn { 
+            display: flex; 
+            align-items: center; 
+            /* Esto centra el contenido, pero mantenemos alineación interna */
+            justify-content: center;
+            /* Ancho fijo para que todos midan lo mismo */
+            width: 100%; 
+            max-width: 280px; 
+            margin: 0 auto; /* Centrado horizontal */
+            padding: 10px 20px; 
+            border-radius: 50px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15); 
+            transition: transform 0.2s ease; 
+            border: none; 
+            color: white !important; 
+            text-decoration: none !important;
+            font-size: 1rem;
+        }
+        
         .social-btn:active { transform: scale(1.05); box-shadow: 0 6px 20px rgba(0,0,0,0.25); }
+
+        /* --- ÍCONO: Alineación y pegado estratégico al texto --- */
+        .social-btn i {
+            /* Reducimos un pelín el ancho de la caja del ícono (de 45 a 40) */
+            width: 40px; 
+            font-size: 1.6rem; 
+            /* Mantenemos la alineación a la IZQUIERDA para que se vean ordenados */
+            text-align: left; 
+            /* ¡AQUÍ ESTÁ EL PUNTO MEDIO! Bajamos a 10px para juntarlos "pero no tanto" */
+            margin-right: 10px; 
+        }
+        
+        .social-btn span {
+            text-align: left; 
+            line-height: 1.1;
+            font-weight: 700;
+        }
+
+        /* COLORES */
+        .wa-contact-btn { background-color: #7abc44; } /* Verde Fátima */
+        .wa-group-btn { background-color: #128C7E; } /* Verde Grupo */
         .ig-btn { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
         .tk-btn { background: #000000; }
         
@@ -390,30 +430,49 @@
 
             <div class="mt-5 p-4 rounded" style="background: rgba(255,255,255,0.8); border: 1px solid rgba(0,0,0,0.1);" data-aos="fade-up">
                 <span class="text-muted fw-bold d-block mb-3 text-center" style="font-size: 0.9rem;">¿Tienes dudas o necesitas más información?</span>
+                
                 <div class="d-flex align-items-center justify-content-center mb-3">
                     <i class="fas fa-user-circle fs-3 me-2" style="color: #2095da;"></i>
                     <span class="fw-bold text-center" style="color: #333; font-size: 1.05rem;">Fátima Esmeralda Ferrer Navarro</span>
                 </div>
-                <a href="https://wa.me/529618530756?text=Hola,%20tengo%20una%20duda%20sobre%20la%20Pascua%202026" target="_blank" class="btn rounded-pill px-4 py-2 fw-bold shadow-sm text-white d-block mx-auto" style="text-decoration: none; background-color: #7abc44; width: fit-content;">
-                    <i class="fab fa-whatsapp me-2 fs-5 align-middle"></i> Contactar por WhatsApp
-                </a>
                 
+                <a href="https://wa.me/529618530756?text=Hola,%20tengo%20una%20duda%20sobre%20la%20Pascua%202026" 
+                   target="_blank" 
+                   class="social-btn wa-contact-btn">
+                    <i class="fab fa-whatsapp"></i> 
+                    <span>Contactar por<br>WhatsApp</span>
+                </a>
+
+                <div class="mt-4 text-center">
+                    <span class="d-block mb-2" style="font-size: 0.9rem; font-weight: 700; color: #2095da;">
+                        ¿Ya te registraste al grupo de Pascua 2026?
+                    </span>
+                    
+                    <a href="https://chat.whatsapp.com/JxMzADmCsR00Qyw8IZzFGO?mode=hqctswi" 
+                       target="_blank" 
+                       class="social-btn wa-group-btn">
+                        <i class="fas fa-users"></i> 
+                        <span>Unirme al Grupo <br> de WhatsApp</span>
+                    </a>
+                </div>
+
                 <div class="mt-4 pt-4 border-top border-secondary-subtle d-flex flex-column align-items-center gap-3">
                     <a href="https://www.instagram.com/daj.sjd?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
-                    target="_blank" 
-                    class="social-btn ig-btn text-decoration-none fw-bold text-center">
-                        <i class="fab fa-instagram fs-4 me-2"></i> Síguenos en Instagram
+                       target="_blank" 
+                       class="social-btn ig-btn">
+                        <i class="fab fa-instagram"></i> 
+                        <span>Síguenos en<br>Instagram</span>
                     </a>
                     
                     <a href="https://www.tiktok.com/@daj.sjd" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    class="social-btn tk-btn text-decoration-none fw-bold text-center">
-                        <i class="fab fa-tiktok fs-4 me-2"></i> Síguenos en TikTok
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="social-btn tk-btn">
+                        <i class="fab fa-tiktok"></i> 
+                        <span>Síguenos en<br>TikTok</span>
                     </a>
                 </div>
             </div>
-
         </div> 
     </div> 
     
