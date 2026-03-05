@@ -576,6 +576,19 @@
 
         const form = document.getElementById('registroPascuaForm');
         const btnGuardar = document.getElementById('btnGuardar');
+        const inputsTexto = form.querySelectorAll('input[type="text"], textarea');
+        inputsTexto.forEach(input => {
+            input.addEventListener('input', function() {
+                // Guarda la posición del cursor para que no salte al final al escribir en medio de una palabra
+                let start = this.selectionStart;
+                let end = this.selectionEnd;
+                
+                this.value = this.value.toUpperCase();
+                
+                // Restaura la posición del cursor
+                this.setSelectionRange(start, end);
+            });
+        });
 
         form.addEventListener('submit', function(e) {
             e.preventDefault(); 
