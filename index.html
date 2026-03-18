@@ -662,6 +662,24 @@
                     left: 0,
                     behavior: 'instant'
                 });
+                window.addEventListener('load', function() {
+            setTimeout(function() {
+                window.scrollTo({
+                    top: 0,
+                    left: 0,
+                    behavior: 'instant'
+                });
+                
+                Swal.fire({
+                    title: '<span style="color: #000;">¡Aviso Importante!</span>',
+                    html: '<span style="color: #000;">El día de mañana a partir de las <b>5:00 PM</b> ya no se podrá pedir el <b>Paquete 2 (con playera)</b>.<br><br>¡Asegura la tuya antes de que se acabe el tiempo! ⏳</span>',
+                    icon: 'info',
+                    confirmButtonColor: '#22b4b1',
+                    confirmButtonText: '¡Entendido!'
+                });
+                
+            }, 50); 
+        });
             }, 50); 
         });
         // --- FUNCIÓN PARA COPIAR EL NÚMERO ---
